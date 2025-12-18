@@ -1,0 +1,28 @@
+{
+  "name": "livemetrics",
+  "version": "1.0.0",
+  "description": "DataPulse - Visualización dinámica de métricas en tiempo real",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "server": "node server/index.js"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "d3": "^7.9.0",
+    "chart.js": "^4.4.1",
+    "react-chartjs-2": "^5.2.0",
+    "socket.io-client": "^4.7.4",
+    "socket.io": "^4.7.4",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "vite": "^6.0.3"
+  }
+}

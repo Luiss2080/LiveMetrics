@@ -1,0 +1,11 @@
+.contenedor-principal {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+@media (max-width: 768px) {
+  .contenedor-principal {
+    padding: 1rem;
+  }
+}

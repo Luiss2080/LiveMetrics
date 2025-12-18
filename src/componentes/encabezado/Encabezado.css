@@ -1,0 +1,32 @@
+.encabezado {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.encabezado__titulo {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.encabezado__subtitulo {
+  font-size: 1.1rem;
+  opacity: 0.9;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+}
+
+@media (max-width: 768px) {
+  .encabezado__titulo {
+    font-size: 2rem;
+  }
+  
+  .encabezado__subtitulo {
+    font-size: 0.9rem;
+  }
+}

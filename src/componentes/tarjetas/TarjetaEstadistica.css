@@ -1,0 +1,52 @@
+.tarjeta-estadistica {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 4px 16px 0 rgba(31, 38, 135, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.tarjeta-estadistica:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px 0 rgba(31, 38, 135, 0.4);
+}
+
+.tarjeta-estadistica__etiqueta {
+  font-size: 0.9rem;
+  opacity: 0.9;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.tarjeta-estadistica__valor {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin: 0.5rem 0;
+  line-height: 1;
+}
+
+.tarjeta-estadistica__icono {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  opacity: 0.8;
+}
+
+.tarjeta-estadistica--alerta {
+  border-color: rgba(248, 113, 113, 0.5);
+  background: rgba(248, 113, 113, 0.1);
+}
+
+.tarjeta-estadistica--normal {
+  border-color: rgba(74, 222, 128, 0.5);
+  background: rgba(74, 222, 128, 0.1);
+}
+
+.tarjeta-estadistica--advertencia {
+  border-color: rgba(251, 191, 36, 0.5);
+  background: rgba(251, 191, 36, 0.1);
+}
