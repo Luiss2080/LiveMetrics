@@ -34,7 +34,7 @@
     "autoprefixer": "^10.5.4",
     "postcss": "^8.5.26",
     "sequelize-cli": "^6.6.5",
-    "tailwindcss": "^4.3.3",
+    "tailwindcss": "^3.4.19",
     "vite": "^6.0.3"
   }
 }
