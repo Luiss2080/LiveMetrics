@@ -7,7 +7,6 @@ import GraficoBarras from '../componentes/graficos/GraficoBarras';
 import GraficoAnillo from '../componentes/graficos/GraficoAnillo';
 import { useMetricas } from '../hooks/useMetricas';
 import { motion } from 'framer-motion';
-import './PanelPrincipal.css';
 
 const PanelPrincipal = () => {
   // Limitar a los últimos 15 datos para evitar sobrecarga en gráficos
@@ -18,7 +17,7 @@ const PanelPrincipal = () => {
       <Encabezado />
       
       <motion.main 
-        className="panel-contenido"
+        className="flex flex-col flex-1"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -20 }}
@@ -26,7 +25,7 @@ const PanelPrincipal = () => {
       >
         <GrupoTarjetas metricas={ultimaMetrica} />
         
-        <div className="graficos-contenedor">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 pb-8">
           <GraficoLineas historial={historialMetricas} />
           <GraficoAnillo disco={ultimaMetrica?.disco || 0} />
           <GraficoBarras historial={historialMetricas} />

@@ -2,7 +2,6 @@ import React from 'react';
 import { Cpu, MemoryStick, Activity, Users } from 'lucide-react';
 import { formatearNumeroGrande, formatearPorcentaje } from '../../utilidades/formateadores';
 import { motion } from 'framer-motion';
-import './GrupoTarjetas.css';
 
 const GrupoTarjetas = ({ metricas }) => {
   const tarjetas = [
@@ -10,33 +9,33 @@ const GrupoTarjetas = ({ metricas }) => {
       id: 'cpu',
       titulo: 'CPU Usage',
       valor: formatearPorcentaje(metricas?.cpu || 0),
-      subtitulo: 'Core Processor',
       icono: <Cpu size={24} />,
-      color: 'blue'
+      bgColor: 'bg-pastel-blue',
+      badge: metricas?.cpu > 80 ? 'text-accent-danger' : 'text-accent-success'
     },
     {
       id: 'ram',
       titulo: 'RAM Memory',
       valor: formatearPorcentaje(metricas?.ram || 0),
-      subtitulo: 'System Memory',
       icono: <MemoryStick size={24} />,
-      color: 'purple'
+      bgColor: 'bg-pastel-purple',
+      badge: metricas?.ram > 80 ? 'text-accent-danger' : 'text-accent-success'
     },
     {
       id: 'req',
       titulo: 'Requests/s',
       valor: formatearNumeroGrande(metricas?.peticiones || 0),
-      subtitulo: 'Server Traffic',
       icono: <Activity size={24} />,
-      color: 'green'
+      bgColor: 'bg-pastel-green',
+      badge: 'text-accent-success'
     },
     {
       id: 'usr',
       titulo: 'Active Users',
       valor: formatearNumeroGrande(metricas?.usuarios || 0),
-      subtitulo: 'Live Sessions',
       icono: <Users size={24} />,
-      color: 'yellow'
+      bgColor: 'bg-pastel-yellow',
+      badge: 'text-accent-success'
     }
   ];
 
@@ -44,9 +43,7 @@ const GrupoTarjetas = ({ metricas }) => {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
+      transition: { staggerChildren: 0.1 }
     }
   };
 
@@ -56,10 +53,18 @@ const GrupoTarjetas = ({ metricas }) => {
   };
 
   return (
-    <div className="seccion-assets">
-      <h3 className="titulo-seccion">Your Assets</h3>
+    <div className="mb-12">
+      <div className="flex justify-between items-end mb-6">
+        <div>
+          <h2 className="text-2xl font-extrabold text-text-main tracking-tight">Portfolio</h2>
+        </div>
+        <div>
+          <h3 className="text-xl font-bold text-text-main">Your Assets</h3>
+        </div>
+      </div>
+      
       <motion.div 
-        className="grupo-tarjetas"
+        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6"
         variants={container}
         initial="hidden"
         animate="show"
@@ -67,20 +72,23 @@ const GrupoTarjetas = ({ metricas }) => {
         {tarjetas.map((t) => (
           <motion.div 
             key={t.id} 
-            className={`tarjeta-asset color-${t.color}`}
+            className={`${t.bgColor} rounded-2xl p-6 flex flex-col relative transition-all duration-200 cursor-pointer hover:-translate-y-1 hover:shadow-lg`}
             variants={item}
-            whileHover={{ y: -5, boxShadow: '0 15px 30px rgba(0,0,0,0.1)' }}
           >
-            <div className="tarjeta-asset-header">
-              <span className="tarjeta-asset-valor">{t.valor}</span>
-              <button className="boton-opciones-tarjeta">⋮</button>
+            <div className="flex justify-between items-start mb-2">
+              <span className="text-3xl font-extrabold text-text-main tracking-tight">{t.valor}</span>
+              <button className="bg-transparent border-none text-text-muted text-xl cursor-pointer hover:text-text-main">⋮</button>
             </div>
-            <div className="tarjeta-asset-titulo">{t.titulo}</div>
+            <div className="text-sm font-medium text-text-muted mb-8">{t.titulo}</div>
             
-            <div className="tarjeta-asset-footer">
-              <div className="icono-asset">{t.icono}</div>
-              <div className="badge-porcentaje">
-                {t.id === 'cpu' || t.id === 'ram' ? (metricas?.[t.id] > 80 ? '⚠️ High' : '✅ Normal') : '+0.15%'}
+            <div className="flex justify-between items-center mt-auto">
+              <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm text-text-main">
+                {t.icono}
+              </div>
+              <div className="bg-white/60 px-3 py-1 rounded-full text-xs font-bold text-text-main">
+                <span className={t.badge}>
+                  {t.id === 'cpu' || t.id === 'ram' ? (metricas?.[t.id] > 80 ? '⚠️ High' : '+0.14%') : '+0.14%'}
+                </span>
               </div>
             </div>
           </motion.div>
