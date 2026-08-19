@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import ContenedorPrincipal from '../componentes/layout/ContenedorPrincipal';
 import Encabezado from '../componentes/encabezado/Encabezado';
 import { useTema } from '../contextos/TemaContext';
-import './Configuracion.css';
+import { motion } from 'framer-motion';
 
 const Configuracion = () => {
   const { temaOscuro, setTemaOscuro } = useTema();
@@ -17,56 +17,64 @@ const Configuracion = () => {
   return (
     <ContenedorPrincipal>
       <Encabezado />
-      <main className="panel-contenido">
-        <div className="configuracion-panel panel-cristal">
-          <h2 className="configuracion-titulo">Ajustes del Sistema</h2>
+      <motion.main 
+        className="flex flex-col flex-1 max-w-2xl"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -20 }}
+        transition={{ duration: 0.4 }}
+      >
+        <div className="bg-white rounded-2xl shadow-sm border border-black/5 flex flex-col p-8">
+          <h2 className="text-2xl font-bold text-text-main mb-8 pb-4 border-b border-black/5">Ajustes del Sistema</h2>
           
-          <form className="formulario-config" onSubmit={guardarAjustes}>
-            <div className="grupo-form">
-              <label className="switch-contenedor">
-                <span className="etiqueta">Tema Oscuro</span>
+          <form className="flex flex-col gap-8" onSubmit={guardarAjustes}>
+            <div className="flex justify-between items-center">
+              <span className="font-semibold text-text-main text-lg">Tema Oscuro</span>
+              <label className="relative inline-flex items-center cursor-pointer">
                 <input 
                   type="checkbox" 
+                  className="sr-only peer"
                   checked={temaOscuro} 
                   onChange={(e) => setTemaOscuro(e.target.checked)} 
                 />
-                <span className="switch-deslizador"></span>
+                <div className="w-14 h-7 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-accent-primary"></div>
               </label>
             </div>
             
-            <div className="grupo-form">
-              <label className="switch-contenedor">
-                <span className="etiqueta">Notificaciones de Alerta</span>
+            <div className="flex justify-between items-center">
+              <span className="font-semibold text-text-main text-lg">Notificaciones de Alerta</span>
+              <label className="relative inline-flex items-center cursor-pointer">
                 <input 
                   type="checkbox" 
+                  className="sr-only peer"
                   checked={notificaciones} 
                   onChange={(e) => setNotificaciones(e.target.checked)} 
                 />
-                <span className="switch-deslizador"></span>
+                <div className="w-14 h-7 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-accent-primary"></div>
               </label>
             </div>
             
-            <div className="grupo-form">
-              <label className="etiqueta-bloque">
-                Umbral Crítico de CPU (%)
-                <span className="valor-rango">{umbralCpu}%</span>
-              </label>
+            <div className="flex flex-col gap-4">
+              <div className="flex justify-between items-center">
+                <span className="font-semibold text-text-main text-lg">Umbral Crítico de CPU (%)</span>
+                <span className="text-lg font-bold text-accent-primary bg-pastel-blue px-3 py-1 rounded-lg">{umbralCpu}%</span>
+              </div>
               <input 
                 type="range" 
                 min="50" 
                 max="99" 
                 value={umbralCpu} 
                 onChange={(e) => setUmbralCpu(e.target.value)} 
-                className="input-rango"
+                className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-accent-primary"
               />
             </div>
             
-            <button type="submit" className="boton-primario">
+            <button type="submit" className="mt-4 w-full py-4 bg-text-main text-white font-bold rounded-xl text-lg hover:bg-black transition-colors">
               Guardar Cambios
             </button>
           </form>
         </div>
-      </main>
+      </motion.main>
     </ContenedorPrincipal>
   );
 };
