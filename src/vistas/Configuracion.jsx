@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ContenedorPrincipal from '../componentes/layout/ContenedorPrincipal';
-import Encabezado from '../componentes/encabezado/Encabezado';
+import Encabezado from '../componentes/layout/Encabezado';
 import { useTema } from '../contextos/TemaContext';
 import { motion } from 'framer-motion';
 

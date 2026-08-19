@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import ContenedorPrincipal from '../componentes/layout/ContenedorPrincipal';
-import Encabezado from '../componentes/encabezado/Encabezado';
+import Encabezado from '../componentes/layout/Encabezado';
 import { useMetricas } from '../hooks/useMetricas';
 import { formatearHora, formatearPorcentaje } from '../utilidades/formateadores';
 import { Download } from 'lucide-react';
