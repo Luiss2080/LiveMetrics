@@ -4,6 +4,7 @@ import Encabezado from '../componentes/encabezado/Encabezado';
 import GrupoTarjetas from '../componentes/tarjetas/GrupoTarjetas';
 import GraficoLineas from '../componentes/graficos/GraficoLineas';
 import GraficoBarras from '../componentes/graficos/GraficoBarras';
+import GraficoAnillo from '../componentes/graficos/GraficoAnillo';
 import { useMetricas } from '../hooks/useMetricas';
 import './PanelPrincipal.css';
 
@@ -20,6 +21,7 @@ const PanelPrincipal = () => {
         
         <div className="graficos-contenedor">
           <GraficoLineas historial={historialMetricas} />
+          <GraficoAnillo disco={ultimaMetrica?.disco || 0} />
           <GraficoBarras historial={historialMetricas} />
         </div>
       </main>

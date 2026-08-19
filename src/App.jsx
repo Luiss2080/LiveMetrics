@@ -1,9 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
+import { TemaProvider } from './contextos/TemaContext';
 import PanelPrincipal from './vistas/PanelPrincipal';
 import Historial from './vistas/Historial';
 import Configuracion from './vistas/Configuracion';
+import Login from './vistas/Login';
 import PantallaCarga from './componentes/estado/PantallaCarga';
+
+const RutaProtegida = ({ children }) => {
+  const auth = localStorage.getItem('livemetrics-auth');
+  return auth ? children : <Navigate to="/login" />;
+};
 
 function App() {
   const [cargando, setCargando] = useState(true);
@@ -22,13 +30,18 @@ function App() {
   }
 
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<PanelPrincipal />} />
-        <Route path="/historial" element={<Historial />} />
-        <Route path="/configuracion" element={<Configuracion />} />
-      </Routes>
-    </Router>
+    <TemaProvider>
+      <Toaster />
+      <Router>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<RutaProtegida><PanelPrincipal /></RutaProtegida>} />
+          <Route path="/historial" element={<RutaProtegida><Historial /></RutaProtegida>} />
+          <Route path="/configuracion" element={<RutaProtegida><Configuracion /></RutaProtegida>} />
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+      </Router>
+    </TemaProvider>
   );
 }
 

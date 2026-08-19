@@ -19,6 +19,8 @@ let cpuUsage = 30;
 let memoryUsage = 40;
 let requestsPerSecond = 100;
 let activeUsers = 50;
+let diskUsage = 65; // Porcentaje de disco
+let networkLatency = 20; // ms
 
 // Función para generar una fluctuación aleatoria más natural
 const generarFluctuacion = (valorActual, min, max, variacion) => {
@@ -50,13 +52,17 @@ setInterval(() => {
   memoryUsage = generarFluctuacion(memoryUsage, 20, 95, 5);
   requestsPerSecond = generarFluctuacion(requestsPerSecond, 50, 1000, 50);
   activeUsers = generarFluctuacion(activeUsers, 10, 500, 10);
+  diskUsage = generarFluctuacion(diskUsage, 60, 95, 1); // El disco varía muy poco
+  networkLatency = generarFluctuacion(networkLatency, 10, 500, 20); // Latencia puede tener picos
 
   const metricas = {
     tiempo: new Date().toISOString(),
     cpu: cpuUsage,
     memoria: memoryUsage,
     peticiones: requestsPerSecond,
-    usuarios: Math.floor(activeUsers) // Usuarios siempre enteros
+    usuarios: Math.floor(activeUsers),
+    disco: diskUsage,
+    red: Math.floor(networkLatency)
   };
 
   io.emit('metricas:actualizacion', metricas);

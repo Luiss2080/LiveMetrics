@@ -36,3 +36,17 @@
   --transicion-rapida: 0.2s ease;
   --transicion-normal: 0.3s ease;
 }
+
+[data-tema="claro"] {
+  --fondo-principal: #f1f5f9;
+  --fondo-secundario: #e2e8f0;
+  --texto-principal: #0f172a;
+  --texto-secundario: #475569;
+  
+  --acento-primario: #2563eb;
+  --acento-secundario: #7c3aed;
+  
+  --glass-fondo: rgba(255, 255, 255, 0.7);
+  --glass-borde: rgba(0, 0, 0, 0.05);
+  --glass-sombra: 0 4px 30px rgba(0, 0, 0, 0.05);
+}

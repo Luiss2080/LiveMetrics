@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import ContenedorPrincipal from '../componentes/layout/ContenedorPrincipal';
 import Encabezado from '../componentes/encabezado/Encabezado';
+import { useTema } from '../contextos/TemaContext';
 import './Configuracion.css';
 
 const Configuracion = () => {
-  const [temaOscuro, setTemaOscuro] = useState(true);
+  const { temaOscuro, setTemaOscuro } = useTema();
   const [notificaciones, setNotificaciones] = useState(true);
   const [umbralCpu, setUmbralCpu] = useState(80);
   

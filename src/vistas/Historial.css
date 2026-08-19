@@ -13,6 +13,25 @@
   color: var(--texto-principal);
 }
 
+.historial-encabezado-acciones {
+  margin-bottom: var(--espaciado-sm);
+}
+
+.acciones-filtros {
+  display: flex;
+  gap: var(--espaciado-md);
+  align-items: center;
+}
+
+.boton-icono {
+  display: flex;
+  align-items: center;
+  gap: var(--espaciado-xs);
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  margin-top: 0;
+}
+
 .tabla-contenedor {
   overflow-y: auto;
   border-radius: var(--radio-sm);
@@ -40,6 +59,15 @@
 
 .tabla-historial tr:hover {
   background-color: rgba(255, 255, 255, 0.02);
+}
+
+.fila-alerta {
+  background-color: rgba(239, 68, 68, 0.05);
+  color: var(--estado-peligro);
+}
+
+.fila-alerta:hover {
+  background-color: rgba(239, 68, 68, 0.1);
 }
 
 .texto-centro {
