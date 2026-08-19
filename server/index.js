@@ -4,7 +4,10 @@ import { Server } from 'socket.io';
 import cors from 'cors';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import db from './models/index.js'; // Importar Sequelize models
+import { createRequire } from 'module';
+
+const require = createRequire(import.meta.url);
+const db = require('./models/index.js'); // Importar Sequelize models usando require
 
 const app = express();
 app.use(cors());
