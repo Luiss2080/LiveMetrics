@@ -1,16 +1,16 @@
-import React from 'react';
+import React, { useState, useMemo } from 'react';
 import ContenedorPrincipal from '../componentes/layout/ContenedorPrincipal';
 import Encabezado from '../componentes/encabezado/Encabezado';
 import { useMetricas } from '../hooks/useMetricas';
-import { formatearHora, formatearPorcentaje, formatearNumeroGrande } from '../utilidades/formateadores';
+import { formatearHora, formatearPorcentaje } from '../utilidades/formateadores';
 import { Download } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const Historial = () => {
   const { historialMetricas } = useMetricas(50);
-  const [filtroAlerta, setFiltroAlerta] = React.useState(false);
+  const [filtroAlerta, setFiltroAlerta] = useState(false);
 
-  const datosFiltrados = React.useMemo(() => {
+  const datosFiltrados = useMemo(() => {
     if (!filtroAlerta) return historialMetricas.slice().reverse();
     return historialMetricas.filter(m => m.cpu >= 80 || m.memoria >= 80).slice().reverse();
   }, [historialMetricas, filtroAlerta]);
@@ -51,15 +51,15 @@ const Historial = () => {
               <label className="flex items-center gap-2 cursor-pointer font-medium text-sm text-text-muted">
                 <input 
                   type="checkbox" 
-                  checked={soloCritico}
-                  onChange={() => setSoloCritico(!soloCritico)}
+                  checked={filtroAlerta}
+                  onChange={(e) => setFiltroAlerta(e.target.checked)}
                   className="w-4 h-4 rounded border-gray-300 text-accent-primary focus:ring-accent-primary"
                 />
                 Solo Eventos Críticos (&gt;80%)
               </label>
               
               <button 
-                onClick={exportarCSV}
+                onClick={descargarCSV}
                 className="flex items-center gap-2 px-4 py-2 bg-text-main text-white rounded-lg font-semibold text-sm transition-all duration-200 hover:bg-black"
               >
                 <Download size={16} /> Exportar CSV
@@ -80,17 +80,17 @@ const Historial = () => {
               </thead>
               <tbody>
                 {datosFiltrados.length > 0 ? (
-                  datosFiltrados.map((fila) => (
-                    <tr key={fila.id} className="border-b border-black/5 transition-colors hover:bg-slate-50/50">
-                      <td className="p-4 font-medium">{formatearHora(fila.timestamp)}</td>
+                  datosFiltrados.map((fila, index) => (
+                    <tr key={index} className="border-b border-black/5 transition-colors hover:bg-slate-50/50">
+                      <td className="p-4 font-medium">{formatearHora(fila.tiempo)}</td>
                       <td className="p-4">
                         <span className={`px-2 py-1 rounded-md font-semibold text-xs ${fila.cpu > 80 ? 'bg-red-100 text-red-700' : 'text-text-main'}`}>
                           {formatearPorcentaje(fila.cpu)}
                         </span>
                       </td>
                       <td className="p-4">
-                        <span className={`px-2 py-1 rounded-md font-semibold text-xs ${fila.ram > 80 ? 'bg-red-100 text-red-700' : 'text-text-main'}`}>
-                          {formatearPorcentaje(fila.ram)}
+                        <span className={`px-2 py-1 rounded-md font-semibold text-xs ${fila.memoria > 80 ? 'bg-red-100 text-red-700' : 'text-text-main'}`}>
+                          {formatearPorcentaje(fila.memoria)}
                         </span>
                       </td>
                       <td className="p-4">
@@ -99,14 +99,14 @@ const Historial = () => {
                         </span>
                       </td>
                       <td className="p-4">
-                        {fila.latencia} ms
+                        {fila.red} ms
                       </td>
                     </tr>
                   ))
                 ) : (
                   <tr>
                     <td colSpan="5" className="p-8 text-center text-text-muted italic">
-                      No hay registros {soloCritico ? 'críticos' : ''} disponibles.
+                      No hay registros {filtroAlerta ? 'críticos' : ''} disponibles.
                     </td>
                   </tr>
                 )}
