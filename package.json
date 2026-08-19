@@ -10,15 +10,19 @@
     "server": "node server/index.js"
   },
   "dependencies": {
+    "bcryptjs": "^3.0.3",
     "chart.js": "^4.4.1",
     "d3": "^7.9.0",
     "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.3",
     "lucide-react": "^1.33.0",
+    "mysql2": "^3.23.3",
     "react": "^18.3.1",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.3.1",
     "react-hot-toast": "^2.6.0",
     "react-router-dom": "^7.18.2",
+    "sequelize": "^6.37.8",
     "socket.io": "^4.7.4",
     "socket.io-client": "^4.7.4"
   },
