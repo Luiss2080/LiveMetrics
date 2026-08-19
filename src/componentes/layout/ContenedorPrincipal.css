@@ -1,11 +1,51 @@
+/* src/componentes/layout/ContenedorPrincipal.css */
 .contenedor-principal {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  padding: var(--espaciado-lg);
+  display: flex;
+  justify-content: center;
+}
+
+.contenido-principal {
+  position: relative;
+  z-index: 10;
+  width: 100%;
   max-width: 1400px;
-  margin: 0 auto;
-  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaciado-lg);
+}
+
+/* Decoraciones de fondo modernas (Orbes borrosos) */
+.decoracion-fondo {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  z-index: 0;
+  opacity: 0.5;
+}
+
+.circulo-1 {
+  background: var(--acento-primario);
+  width: 500px;
+  height: 500px;
+  top: -100px;
+  left: -100px;
+}
+
+.circulo-2 {
+  background: var(--acento-secundario);
+  width: 400px;
+  height: 400px;
+  bottom: -50px;
+  right: -50px;
 }
 
 @media (max-width: 768px) {
   .contenedor-principal {
-    padding: 1rem;
+    padding: var(--espaciado-sm);
   }
 }

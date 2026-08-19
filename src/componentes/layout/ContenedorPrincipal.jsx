@@ -1,12 +1,17 @@
-import React from 'react'
-import './ContenedorPrincipal.css'
+import React from 'react';
+import './ContenedorPrincipal.css';
 
-function ContenedorPrincipal({ children }) {
+const ContenedorPrincipal = ({ children }) => {
   return (
     <div className="contenedor-principal">
-      {children}
+      <div className="decoracion-fondo circulo-1"></div>
+      <div className="decoracion-fondo circulo-2"></div>
+      
+      <div className="contenido-principal">
+        {children}
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default ContenedorPrincipal
+export default ContenedorPrincipal;

@@ -1,18 +1,20 @@
-import React from 'react'
-import './Encabezado.css'
+import React from 'react';
+import './Encabezado.css';
+import IndicadorConexion from '../estado/IndicadorConexion';
 
-function Encabezado() {
+const Encabezado = () => {
   return (
-    <header className="encabezado">
-      <h1 className="encabezado__titulo">
-        <span>📊</span>
-        <span>LiveMetrics</span>
-      </h1>
-      <p className="encabezado__subtitulo">
-        Visualización dinámica de métricas en tiempo real
-      </p>
+    <header className="encabezado panel-cristal flex-entre">
+      <div className="logo-contenedor">
+        <h1 className="titulo texto-gradiente">LiveMetrics</h1>
+        <p className="subtitulo">Panel de Control en Tiempo Real</p>
+      </div>
+      
+      <div className="acciones-encabezado">
+        <IndicadorConexion />
+      </div>
     </header>
-  )
-}
+  );
+};
 
-export default Encabezado
+export default Encabezado;
