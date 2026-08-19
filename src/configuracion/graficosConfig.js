@@ -4,6 +4,7 @@ import {
   LinearScale,
   PointElement,
   LineElement,
+  BarElement,
   Title,
   Tooltip,
   Legend,
@@ -16,13 +17,17 @@ ChartJS.register(
   LinearScale,
   PointElement,
   LineElement,
+  BarElement,
   Title,
   Tooltip,
   Legend,
   Filler
 );
 
-// Opciones globales para gráficos de líneas
+const textColor = '#64748b'; // Tailwind slate-500
+const gridColor = 'rgba(0, 0, 0, 0.05)';
+const tooltipBg = 'rgba(15, 23, 42, 0.9)';
+
 export const opcionesGraficoLineas = {
   responsive: true,
   maintainAspectRatio: false,
@@ -37,7 +42,7 @@ export const opcionesGraficoLineas = {
     tooltip: {
       mode: 'index',
       intersect: false,
-      backgroundColor: 'rgba(15, 23, 42, 0.9)',
+      backgroundColor: tooltipBg,
       titleColor: '#f8fafc',
       bodyColor: '#cbd5e1',
       borderColor: 'rgba(255,255,255,0.1)',
@@ -47,11 +52,11 @@ export const opcionesGraficoLineas = {
   scales: {
     x: {
       grid: {
-        color: 'rgba(255, 255, 255, 0.05)',
+        color: gridColor,
         drawBorder: false
       },
       ticks: {
-        color: '#cbd5e1',
+        color: textColor,
         maxRotation: 0,
         autoSkip: true,
         maxTicksLimit: 7
@@ -61,11 +66,11 @@ export const opcionesGraficoLineas = {
       min: 0,
       max: 100,
       grid: {
-        color: 'rgba(255, 255, 255, 0.05)',
+        color: gridColor,
         drawBorder: false
       },
       ticks: {
-        color: '#cbd5e1'
+        color: textColor
       }
     }
   },
@@ -73,5 +78,59 @@ export const opcionesGraficoLineas = {
     mode: 'nearest',
     axis: 'x',
     intersect: false
+  }
+};
+
+export const opcionesGraficoBarras = {
+  responsive: true,
+  maintainAspectRatio: false,
+  animation: {
+    duration: 300,
+    easing: 'linear'
+  },
+  plugins: {
+    legend: {
+      display: false
+    },
+    tooltip: {
+      backgroundColor: tooltipBg,
+    }
+  },
+  scales: {
+    x: {
+      grid: {
+        display: false
+      },
+      ticks: {
+        color: textColor,
+        maxRotation: 0,
+        autoSkip: true,
+        maxTicksLimit: 7
+      }
+    },
+    y: {
+      beginAtZero: true,
+      grid: {
+        color: gridColor,
+        drawBorder: false
+      },
+      ticks: {
+        color: textColor
+      }
+    }
+  }
+};
+
+export const opcionesGraficoAnillo = {
+  responsive: true,
+  maintainAspectRatio: false,
+  cutout: '75%',
+  plugins: {
+    legend: {
+      display: false
+    },
+    tooltip: {
+      backgroundColor: tooltipBg,
+    }
   }
 };
