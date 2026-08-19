@@ -7,7 +7,7 @@ import jwt from 'jsonwebtoken';
 import { createRequire } from 'module';
 
 const require = createRequire(import.meta.url);
-const db = require('./models/index.js'); // Importar Sequelize models usando require
+const db = require('./models/index.cjs'); // Importar Sequelize models usando require
 
 const app = express();
 app.use(cors());
