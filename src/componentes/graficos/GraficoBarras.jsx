@@ -2,7 +2,6 @@ import React, { useEffect, useRef } from 'react';
 import * as d3 from 'd3';
 import { d3ConfigBarras } from '../../configuracion/d3Config';
 import { formatearHora } from '../../utilidades/formateadores';
-import './GraficoBarras.css';
 
 const GraficoBarras = ({ historial }) => {
   const contenedorRef = useRef(null);
@@ -66,9 +65,17 @@ const GraficoBarras = ({ historial }) => {
   }, [historial]);
 
   return (
-    <div className="grafico-barras panel-cristal">
-      <h3 className="grafico-titulo">Peticiones por Segundo</h3>
-      <div ref={contenedorRef} className="d3-contenedor"></div>
+    <div className="bg-white rounded-2xl shadow-sm border border-black/5 p-6 flex flex-col h-full">
+      <h3 className="text-lg font-bold text-text-main mb-4">Tráfico (Peticiones/s)</h3>
+      <div className="relative w-full h-[250px] flex-1">
+        {historial.length > 0 ? (
+          <Bar options={opcionesGraficoBarras} data={datos} />
+        ) : (
+          <div className="flex items-center justify-center h-full">
+            <p className="text-text-muted">Cargando gráfico...</p>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
