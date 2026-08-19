@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 import { Doughnut } from 'react-chartjs-2';
+import { opcionesGraficoAnillo } from '../../configuracion/graficosConfig';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -25,28 +26,15 @@ const GraficoAnillo = ({ disco }) => {
     };
   }, [disco]);
 
-  const opciones = {
-    responsive: true,
-    maintainAspectRatio: false,
-    cutout: '70%',
-    plugins: {
-      legend: {
-        position: 'bottom',
-        labels: {
-          color: '#cbd5e1'
-        }
-      }
-    }
-  };
-
   return (
-    <div className="grafico-barras panel-cristal" style={{ minWidth: '250px' }}>
-      <h3 className="grafico-titulo">Almacenamiento</h3>
-      <div className="d3-contenedor" style={{ height: '200px' }}>
-        <Doughnut data={datos} options={opciones} />
-      </div>
-      <div style={{ textAlign: 'center', marginTop: '1rem', fontWeight: 'bold' }}>
-        {disco}% Usado
+    <div className="bg-white rounded-2xl shadow-sm border border-black/5 p-6 flex flex-col items-center h-full">
+      <h3 className="text-lg font-bold text-text-main mb-4 self-start">Almacenamiento (Disco)</h3>
+      <div className="relative w-[200px] h-[200px] flex items-center justify-center my-auto">
+        <Doughnut data={datos} options={opcionesGraficoAnillo} />
+        <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+          <span className="text-2xl font-bold text-text-main">{disco}%</span>
+          <span className="text-xs text-text-muted">Usado</span>
+        </div>
       </div>
     </div>
   );
