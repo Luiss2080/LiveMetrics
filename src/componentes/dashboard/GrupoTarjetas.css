@@ -1,0 +1,111 @@
+.seccion-assets {
+  margin-bottom: 3rem;
+}
+
+.titulo-seccion {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--texto-principal);
+  margin-bottom: 1rem;
+}
+
+.grupo-tarjetas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.tarjeta-asset {
+  border-radius: var(--radio-lg);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tarjeta-asset-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.5rem;
+}
+
+.tarjeta-asset-valor {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--texto-principal);
+  letter-spacing: -1px;
+}
+
+.boton-opciones-tarjeta {
+  background: transparent;
+  border: none;
+  color: var(--texto-secundario);
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.tarjeta-asset-titulo {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--texto-secundario);
+  margin-bottom: 2rem;
+}
+
+.tarjeta-asset-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+}
+
+.icono-asset {
+  width: 40px;
+  height: 40px;
+  background: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  color: var(--texto-principal);
+}
+
+.badge-porcentaje {
+  background: rgba(255, 255, 255, 0.6);
+  padding: 0.3rem 0.6rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--texto-principal);
+}
+
+/* Colores Pastel */
+.color-blue {
+  background-color: var(--pastel-blue);
+}
+
+.color-purple {
+  background-color: var(--pastel-purple);
+}
+
+.color-green {
+  background-color: var(--pastel-green);
+}
+
+.color-yellow {
+  background-color: var(--pastel-yellow);
+}
+
+@media (max-width: 768px) {
+  .grupo-tarjetas {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .grupo-tarjetas {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,44 +1,55 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, History, Settings } from 'lucide-react';
+import { LayoutDashboard, History, Settings, LogOut, Layers } from 'lucide-react';
 import './BarraLateral.css';
 
 const BarraLateral = () => {
   return (
-    <aside className="barra-lateral panel-cristal">
-      <div className="barra-logo" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '1rem', marginTop: '1rem' }}>
-        <img src="/logo.jpg" alt="Logo" style={{ width: '40px', height: '40px', borderRadius: '10px', boxShadow: '0 0 10px rgba(59, 130, 246, 0.5)' }} />
-      </div>
-      <div className="barra-enlaces">
-        <h2 className="texto-gradiente">LM</h2>
+    <aside className="barra-lateral">
+      <div className="barra-logo">
+        <div className="logo-icono">
+          <Layers size={24} color="#1a1d21" />
+        </div>
+        <span className="logo-texto">LiveMetrics</span>
       </div>
       
-      <nav className="menu-navegacion">
+      <nav className="barra-enlaces">
         <NavLink 
           to="/" 
-          className={({ isActive }) => isActive ? "item-menu activo" : "item-menu"}
+          className={({ isActive }) => isActive ? 'enlace-lateral activo' : 'enlace-lateral'}
           end
         >
-          <LayoutDashboard size={24} />
-          <span>Dashboard</span>
+          <LayoutDashboard size={20} />
+          <span>Overview</span>
         </NavLink>
         
         <NavLink 
           to="/historial" 
-          className={({ isActive }) => isActive ? "item-menu activo" : "item-menu"}
+          className={({ isActive }) => isActive ? 'enlace-lateral activo' : 'enlace-lateral'}
         >
-          <History size={24} />
+          <History size={20} />
           <span>Historial</span>
         </NavLink>
         
         <NavLink 
           to="/configuracion" 
-          className={({ isActive }) => isActive ? "item-menu activo" : "item-menu"}
+          className={({ isActive }) => isActive ? 'enlace-lateral activo' : 'enlace-lateral'}
         >
-          <Settings size={24} />
+          <Settings size={20} />
           <span>Ajustes</span>
         </NavLink>
       </nav>
+
+      <div className="barra-footer">
+        <NavLink 
+          to="/login" 
+          className="enlace-lateral"
+          onClick={() => { localStorage.removeItem('livemetrics-auth'); localStorage.removeItem('livemetrics-user'); }}
+        >
+          <LogOut size={20} />
+          <span>Salir</span>
+        </NavLink>
+      </div>
     </aside>
   );
 };
