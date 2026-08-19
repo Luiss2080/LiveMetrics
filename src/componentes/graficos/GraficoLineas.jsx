@@ -1,71 +1,52 @@
-import React from 'react'
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-  Filler
-} from 'chart.js'
-import { Line } from 'react-chartjs-2'
-import { opcionesGraficoLineas, coloresGraficos } from '../../configuracion/graficosConfig'
-import './GraficoLineas.css'
+import React, { useMemo } from 'react';
+import { Line } from 'react-chartjs-2';
+import { opcionesGraficoLineas } from '../../configuracion/graficosConfig';
+import { formatearHora } from '../../utilidades/formateadores';
+import './GraficoLineas.css';
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-  Filler
-)
-
-function GraficoLineas({ datos }) {
-  const datosGrafico = {
-    labels: datos.map((_, indice) => `${indice + 1}`),
-    datasets: [
-      {
-        label: 'CPU %',
-        data: datos.map(d => d.cpu),
-        borderColor: coloresGraficos.cpu.borde,
-        backgroundColor: coloresGraficos.cpu.fondo,
-        fill: true,
-        tension: 0.4
-      },
-      {
-        label: 'Memoria %',
-        data: datos.map(d => d.memory),
-        borderColor: coloresGraficos.memoria.borde,
-        backgroundColor: coloresGraficos.memoria.fondo,
-        fill: true,
-        tension: 0.4
-      },
-      {
-        label: 'Requests',
-        data: datos.map(d => d.requests),
-        borderColor: coloresGraficos.peticiones.borde,
-        backgroundColor: coloresGraficos.peticiones.fondo,
-        fill: true,
-        tension: 0.4
-      }
-    ]
-  }
+const GraficoLineas = ({ historial }) => {
+  const datos = useMemo(() => {
+    return {
+      labels: historial.map(d => formatearHora(d.tiempo)),
+      datasets: [
+        {
+          label: 'Uso de CPU (%)',
+          data: historial.map(d => d.cpu),
+          borderColor: '#3b82f6', // acento primario
+          backgroundColor: 'rgba(59, 130, 246, 0.1)',
+          borderWidth: 2,
+          pointRadius: 0,
+          pointHoverRadius: 4,
+          fill: true,
+          tension: 0.4
+        },
+        {
+          label: 'Uso de Memoria (%)',
+          data: historial.map(d => d.memoria),
+          borderColor: '#8b5cf6', // acento secundario
+          backgroundColor: 'rgba(139, 92, 246, 0.1)',
+          borderWidth: 2,
+          pointRadius: 0,
+          pointHoverRadius: 4,
+          fill: true,
+          tension: 0.4
+        }
+      ]
+    };
+  }, [historial]);
 
   return (
-    <div className="contenedor-grafico">
-      <h2 className="contenedor-grafico__titulo">
-        📈 Métricas del Sistema
-      </h2>
-      <div className="contenedor-grafico__canvas">
-        <Line data={datosGrafico} options={opcionesGraficoLineas} />
+    <div className="grafico-lineas panel-cristal">
+      <h3 className="grafico-titulo">Rendimiento del Sistema</h3>
+      <div className="grafico-contenedor">
+        {historial.length > 0 ? (
+          <Line options={opcionesGraficoLineas} data={datos} />
+        ) : (
+          <p className="texto-secundario">Cargando gráfico...</p>
+        )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default GraficoLineas
+export default GraficoLineas;

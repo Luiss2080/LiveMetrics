@@ -1,20 +1,28 @@
-.contenedor-grafico {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border-radius: 12px;
-  padding: 1.5rem;
-  margin: 1rem 0;
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+/* src/componentes/graficos/GraficoLineas.css */
+.grafico-lineas {
+  padding: var(--espaciado-md);
+  flex: 2;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
 }
 
-.contenedor-grafico__titulo {
-  font-size: 1.5rem;
+.grafico-titulo {
+  font-size: 1.1rem;
   font-weight: 600;
-  margin-bottom: 1rem;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  margin-bottom: var(--espaciado-sm);
+  color: var(--texto-principal);
 }
 
-.contenedor-grafico__canvas {
-  height: 300px;
+.grafico-contenedor {
+  position: relative;
+  height: 250px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.texto-secundario {
+  color: var(--texto-secundario);
 }

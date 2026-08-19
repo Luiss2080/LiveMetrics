@@ -1,26 +1,19 @@
-.contenedor-grafico-barras {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border-radius: 12px;
-  padding: 1.5rem;
-  margin: 1rem 0;
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+/* src/componentes/graficos/GraficoBarras.css */
+.grafico-barras {
+  padding: var(--espaciado-md);
+  flex: 1;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
 }
 
-.contenedor-grafico-barras__titulo {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.contenedor-grafico-barras__svg {
-  overflow-x: auto;
+.d3-contenedor {
   width: 100%;
+  height: 250px;
+  position: relative;
 }
 
-.contenedor-grafico-barras__svg svg {
-  display: block;
-  margin: 0 auto;
+.barra:hover {
+  fill: var(--acento-secundario);
+  transition: fill 0.3s;
 }
