@@ -1,42 +1,30 @@
-import { useState, useEffect } from 'react'
-import socketServicio from '../servicios/socketServicio'
+import { useState, useEffect } from 'react';
+import { socket } from '../servicios/socketServicio';
 
-/**
- * Hook personalizado para manejar métricas en tiempo real
- */
-export function useMetricas() {
-  const [metricas, setMetricas] = useState([])
-  const [estadisticasActuales, setEstadisticasActuales] = useState({
-    cpu: 0,
-    memoria: 0,
-    peticiones: 0,
-    usuariosActivos: 0
-  })
+export const useMetricas = (limiteHistorial = 20) => {
+  const [historialMetricas, setHistorialMetricas] = useState([]);
+  const [ultimaMetrica, setUltimaMetrica] = useState(null);
 
   useEffect(() => {
-    // Escuchar métricas del servidor
-    socketServicio.escucharMetricas((datos) => {
-      // Actualizar historial de métricas
-      setMetricas(anterior => {
-        const nuevasMetricas = [...anterior, datos]
-        // Mantener solo los últimos 20 puntos
-        return nuevasMetricas.slice(-20)
-      })
+    const onActualizacionMetricas = (metrica) => {
+      setUltimaMetrica(metrica);
       
-      // Actualizar estadísticas actuales
-      setEstadisticasActuales({
-        cpu: datos.cpu,
-        memoria: datos.memory,
-        peticiones: datos.requests,
-        usuariosActivos: datos.activeUsers
-      })
-    })
+      setHistorialMetricas(previo => {
+        const nuevoHistorial = [...previo, metrica];
+        // Mantener solo los últimos N elementos para no desbordar memoria
+        if (nuevoHistorial.length > limiteHistorial) {
+          return nuevoHistorial.slice(nuevoHistorial.length - limiteHistorial);
+        }
+        return nuevoHistorial;
+      });
+    };
 
-    // Limpiar al desmontar
+    socket.on('metricas:actualizacion', onActualizacionMetricas);
+
     return () => {
-      socketServicio.dejarDeEscuchar('metrics')
-    }
-  }, [])
+      socket.off('metricas:actualizacion', onActualizacionMetricas);
+    };
+  }, [limiteHistorial]);
 
-  return { metricas, estadisticasActuales }
-}
+  return { historialMetricas, ultimaMetrica };
+};

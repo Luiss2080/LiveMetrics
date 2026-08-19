@@ -1,34 +1,26 @@
-import { useState, useEffect } from 'react'
-import socketServicio from '../servicios/socketServicio'
+import { useState, useEffect } from 'react';
+import { socket } from '../servicios/socketServicio';
 
-/**
- * Hook personalizado para manejar el estado de conexión
- */
-export function useConexion() {
-  const [conectado, setConectado] = useState(false)
+export const useConexion = () => {
+  const [estaConectado, setEstaConectado] = useState(socket.connected);
 
   useEffect(() => {
-    // Inicializar socket
-    socketServicio.inicializar()
+    const onConectar = () => {
+      setEstaConectado(true);
+    };
 
-    // Escuchar conexión
-    socketServicio.alConectar(() => {
-      console.log('✅ Conectado al servidor')
-      setConectado(true)
-    })
+    const onDesconectar = () => {
+      setEstaConectado(false);
+    };
 
-    // Escuchar desconexión
-    socketServicio.alDesconectar(() => {
-      console.log('❌ Desconectado del servidor')
-      setConectado(false)
-    })
+    socket.on('connect', onConectar);
+    socket.on('disconnect', onDesconectar);
 
-    // Limpiar al desmontar
     return () => {
-      socketServicio.dejarDeEscuchar('connect')
-      socketServicio.dejarDeEscuchar('disconnect')
-    }
-  }, [])
+      socket.off('connect', onConectar);
+      socket.off('disconnect', onDesconectar);
+    };
+  }, []);
 
-  return { conectado }
-}
+  return estaConectado;
+};
