@@ -1,18 +1,16 @@
+/* src/componentes/tarjetas/GrupoTarjetas.css */
 .grupo-tarjetas {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
-  margin: 1.5rem 0;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--espaciado-md);
+  margin-bottom: var(--espaciado-lg);
 }
 
-@media (max-width: 768px) {
-  .grupo-tarjetas {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 480px) {
-  .grupo-tarjetas {
-    grid-template-columns: 1fr;
-  }
+.cargando {
+  text-align: center;
+  color: var(--texto-secundario);
+  padding: var(--espaciado-lg);
+  background: var(--glass-fondo);
+  border-radius: var(--radio-md);
+  border: 1px solid var(--glass-borde);
 }

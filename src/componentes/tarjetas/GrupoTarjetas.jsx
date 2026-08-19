@@ -1,44 +1,43 @@
-import React from 'react'
-import TarjetaEstadistica from './TarjetaEstadistica'
-import './GrupoTarjetas.css'
+import React from 'react';
+import TarjetaEstadistica from './TarjetaEstadistica';
+import { 
+  formatearPorcentaje, 
+  formatearNumeroGrande, 
+  obtenerColorEstado 
+} from '../../utilidades/formateadores';
+import './GrupoTarjetas.css';
 
-function GrupoTarjetas({ estadisticas }) {
-  const obtenerTipoSegunValor = (valor) => {
-    if (valor < 30) return 'normal'
-    if (valor < 70) return 'advertencia'
-    return 'alerta'
-  }
+const GrupoTarjetas = ({ metricas }) => {
+  if (!metricas) return <div className="cargando">Esperando datos...</div>;
 
   return (
     <div className="grupo-tarjetas">
-      <TarjetaEstadistica
+      <TarjetaEstadistica 
+        titulo="Uso CPU" 
+        valor={formatearPorcentaje(metricas.cpu)}
         icono="💻"
-        etiqueta="CPU Usage"
-        valor={estadisticas.cpu}
-        unidad="%"
-        tipo={obtenerTipoSegunValor(estadisticas.cpu)}
+        colorEstado={obtenerColorEstado(metricas.cpu)}
       />
-      <TarjetaEstadistica
+      <TarjetaEstadistica 
+        titulo="Memoria RAM" 
+        valor={formatearPorcentaje(metricas.memoria)}
         icono="🧠"
-        etiqueta="Memoria"
-        valor={estadisticas.memoria}
-        unidad="%"
-        tipo={obtenerTipoSegunValor(estadisticas.memoria)}
+        colorEstado={obtenerColorEstado(metricas.memoria)}
       />
-      <TarjetaEstadistica
+      <TarjetaEstadistica 
+        titulo="Peticiones / Seg" 
+        valor={formatearNumeroGrande(metricas.peticiones)}
         icono="📡"
-        etiqueta="Requests/s"
-        valor={estadisticas.peticiones}
-        tipo="normal"
+        colorEstado="var(--acento-primario)"
       />
-      <TarjetaEstadistica
+      <TarjetaEstadistica 
+        titulo="Usuarios Activos" 
+        valor={formatearNumeroGrande(metricas.usuarios)}
         icono="👥"
-        etiqueta="Usuarios Activos"
-        valor={estadisticas.usuariosActivos}
-        tipo="normal"
+        colorEstado="var(--acento-secundario)"
       />
     </div>
-  )
-}
+  );
+};
 
-export default GrupoTarjetas
+export default GrupoTarjetas;
