@@ -1,16 +1,23 @@
-import React from 'react'
-import './TarjetaEstadistica.css'
+import React from 'react';
+import './TarjetaEstadistica.css';
 
-function TarjetaEstadistica({ icono, etiqueta, valor, unidad = '', tipo = 'normal' }) {
+const TarjetaEstadistica = ({ titulo, valor, icono, colorEstado }) => {
   return (
-    <div className={`tarjeta-estadistica tarjeta-estadistica--${tipo}`}>
-      {icono && <div className="tarjeta-estadistica__icono">{icono}</div>}
-      <div className="tarjeta-estadistica__etiqueta">{etiqueta}</div>
-      <div className="tarjeta-estadistica__valor">
-        {valor}{unidad}
+    <div className="tarjeta-estadistica panel-cristal">
+      <div className="tarjeta-encabezado">
+        <h3 className="tarjeta-titulo">{titulo}</h3>
+        <span className="tarjeta-icono" style={{ color: colorEstado }}>
+          {icono}
+        </span>
+      </div>
+      
+      <div className="tarjeta-cuerpo">
+        <div className="tarjeta-valor" style={{ color: colorEstado }}>
+          {valor}
+        </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default TarjetaEstadistica
+export default TarjetaEstadistica;

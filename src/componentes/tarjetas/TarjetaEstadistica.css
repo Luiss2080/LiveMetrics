@@ -1,52 +1,40 @@
+/* src/componentes/tarjetas/TarjetaEstadistica.css */
 .tarjeta-estadistica {
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(10px);
-  border-radius: 8px;
-  padding: 1.5rem;
-  text-align: center;
-  box-shadow: 0 4px 16px 0 rgba(31, 38, 135, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  transition: all 0.3s ease;
+  padding: var(--espaciado-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaciado-sm);
+  min-width: 200px;
+  flex: 1;
 }
 
-.tarjeta-estadistica:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 24px 0 rgba(31, 38, 135, 0.4);
+.tarjeta-encabezado {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.tarjeta-estadistica__etiqueta {
+.tarjeta-titulo {
   font-size: 0.9rem;
-  opacity: 0.9;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 0.5rem;
+  color: var(--texto-secundario);
   font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-.tarjeta-estadistica__valor {
-  font-size: 2.5rem;
-  font-weight: bold;
-  margin: 0.5rem 0;
-  line-height: 1;
-}
-
-.tarjeta-estadistica__icono {
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
+.tarjeta-icono {
+  font-size: 1.2rem;
   opacity: 0.8;
 }
 
-.tarjeta-estadistica--alerta {
-  border-color: rgba(248, 113, 113, 0.5);
-  background: rgba(248, 113, 113, 0.1);
+.tarjeta-cuerpo {
+  display: flex;
+  align-items: flex-end;
 }
 
-.tarjeta-estadistica--normal {
-  border-color: rgba(74, 222, 128, 0.5);
-  background: rgba(74, 222, 128, 0.1);
-}
-
-.tarjeta-estadistica--advertencia {
-  border-color: rgba(251, 191, 36, 0.5);
-  background: rgba(251, 191, 36, 0.1);
+.tarjeta-valor {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.2);
 }
