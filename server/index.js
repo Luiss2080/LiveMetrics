@@ -1,43 +1,68 @@
-import express from 'express'
-import { createServer } from 'http'
-import { Server } from 'socket.io'
+import express from 'express';
+import { createServer } from 'http';
+import { Server } from 'socket.io';
+import cors from 'cors';
 
-const app = express()
-const httpServer = createServer(app)
+const app = express();
+app.use(cors());
+
+const httpServer = createServer(app);
 const io = new Server(httpServer, {
   cors: {
-    origin: 'http://localhost:3000',
+    origin: '*',
     methods: ['GET', 'POST']
   }
-})
+});
 
-// Función para generar métricas aleatorias
-function generateMetrics() {
-  return {
-    timestamp: new Date().toISOString(),
-    cpu: Math.floor(Math.random() * 100),
-    memory: Math.floor(Math.random() * 100),
-    requests: Math.floor(Math.random() * 1000),
-    activeUsers: Math.floor(Math.random() * 500)
+// Valores iniciales simulados
+let cpuUsage = 30;
+let memoryUsage = 40;
+let requestsPerSecond = 100;
+let activeUsers = 50;
+
+// Función para generar una fluctuación aleatoria más natural
+const generarFluctuacion = (valorActual, min, max, variacion) => {
+  // Posibilidad de un pico repentino (10% de probabilidad)
+  if (Math.random() < 0.1) {
+    return Math.min(max, valorActual + variacion * 3);
   }
-}
+  const cambio = (Math.random() * variacion * 2) - variacion;
+  let nuevoValor = valorActual + cambio;
+  
+  if (nuevoValor < min) nuevoValor = min;
+  if (nuevoValor > max) nuevoValor = max;
+  
+  return Number(nuevoValor.toFixed(1));
+};
 
 io.on('connection', (socket) => {
-  console.log('✅ Cliente conectado:', socket.id)
-
-  // Enviar métricas cada segundo
-  const interval = setInterval(() => {
-    const metrics = generateMetrics()
-    socket.emit('metrics', metrics)
-  }, 1000)
+  console.log('🟢 Cliente conectado:', socket.id);
 
   socket.on('disconnect', () => {
-    console.log('❌ Cliente desconectado:', socket.id)
-    clearInterval(interval)
-  })
-})
+    console.log('🔴 Cliente desconectado:', socket.id);
+  });
+});
 
-const PORT = 3001
-httpServer.listen(PORT, () => {
-  console.log(`🚀 Servidor Socket.io corriendo en http://localhost:${PORT}`)
-})
+// Emitir métricas cada segundo
+setInterval(() => {
+  // Generar nuevas métricas
+  cpuUsage = generarFluctuacion(cpuUsage, 5, 100, 15);
+  memoryUsage = generarFluctuacion(memoryUsage, 20, 95, 5);
+  requestsPerSecond = generarFluctuacion(requestsPerSecond, 50, 1000, 50);
+  activeUsers = generarFluctuacion(activeUsers, 10, 500, 10);
+
+  const metricas = {
+    tiempo: new Date().toISOString(),
+    cpu: cpuUsage,
+    memoria: memoryUsage,
+    peticiones: requestsPerSecond,
+    usuarios: Math.floor(activeUsers) // Usuarios siempre enteros
+  };
+
+  io.emit('metricas:actualizacion', metricas);
+}, 1000);
+
+const PUERTO = process.env.PORT || 3001;
+httpServer.listen(PUERTO, () => {
+  console.log(`🚀 Servidor Socket.io corriendo en el puerto ${PUERTO}`);
+});

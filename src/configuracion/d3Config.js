@@ -1,25 +1,8 @@
-/**
- * Configuración para gráficos D3.js
- */
-
-export const configuracionBarras = {
-  margen: {
-    superior: 20,
-    derecha: 30,
-    inferior: 40,
-    izquierda: 50
-  },
-  ancho: 800,
-  altura: 300,
-  colorBarra: '#4ade80',
-  colorBarraHover: '#22c55e',
-  opacidad: 0.8,
-  opacidadHover: 1,
-  padding: 0.2
-}
-
-export const estilosEjes = {
-  colorTexto: '#ffffff',
-  tamañoFuente: 12,
-  familia: 'Segoe UI, sans-serif'
-}
+// Configuraciones por defecto para gráficos hechos en D3
+export const d3ConfigBarras = {
+  margen: { top: 20, right: 20, bottom: 30, left: 40 },
+  colorBarra: '#3b82f6', // acento primario
+  colorFondo: 'rgba(255, 255, 255, 0.05)',
+  colorTexto: '#cbd5e1',
+  duracionAnimacion: 500
+};

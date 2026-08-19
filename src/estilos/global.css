@@ -1,4 +1,6 @@
+/* src/estilos/global.css */
 @import './variables.css';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 * {
   margin: 0;
@@ -7,67 +9,35 @@
 }
 
 body {
-  font-family: var(--fuente-principal);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(
-    135deg, 
-    var(--fondo-degradado-inicio) 0%, 
-    var(--fondo-degradado-fin) 100%
-  );
-  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--fondo-principal);
   color: var(--texto-principal);
+  min-height: 100vh;
+  /* Fondo con un sutil gradiente moderno */
+  background: radial-gradient(circle at top right, #1e1b4b, var(--fondo-principal));
+  background-attachment: fixed;
 }
 
 #root {
-  width: 100%;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-  font-weight: 600;
-}
-
-a {
-  color: var(--color-acento);
-  text-decoration: none;
-  transition: var(--transicion-normal);
-}
-
-a:hover {
-  opacity: 0.8;
-}
-
-button {
-  font-family: inherit;
-  cursor: pointer;
-  border: none;
-  outline: none;
-  transition: var(--transicion-normal);
-}
-
-input, textarea, select {
-  font-family: inherit;
-  outline: none;
-}
-
-/* Scrollbar personalizada */
+/* Scrollbar personalizado */
 ::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: var(--radio-mediano);
+  background: var(--fondo-principal);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: var(--radio-mediano);
+  background: var(--fondo-secundario);
+  border-radius: var(--radio-sm);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.5);
+  background: var(--acento-primario);
 }

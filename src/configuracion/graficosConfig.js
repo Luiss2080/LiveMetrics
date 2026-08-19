@@ -1,77 +1,77 @@
-/**
- * Configuración para gráficos de Chart.js
- */
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler
+} from 'chart.js';
 
+// Registrar los componentes necesarios de Chart.js
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler
+);
+
+// Opciones globales para gráficos de líneas
 export const opcionesGraficoLineas = {
   responsive: true,
   maintainAspectRatio: false,
+  animation: {
+    duration: 300,
+    easing: 'linear'
+  },
   plugins: {
     legend: {
-      position: 'top',
-      labels: {
-        color: '#ffffff',
-        font: {
-          size: 12,
-          family: "'Segoe UI', sans-serif"
-        }
-      }
+      display: false
     },
     tooltip: {
-      backgroundColor: 'rgba(0, 0, 0, 0.8)',
-      padding: 12,
-      titleFont: {
-        size: 14
-      },
-      bodyFont: {
-        size: 13
-      }
+      mode: 'index',
+      intersect: false,
+      backgroundColor: 'rgba(15, 23, 42, 0.9)',
+      titleColor: '#f8fafc',
+      bodyColor: '#cbd5e1',
+      borderColor: 'rgba(255,255,255,0.1)',
+      borderWidth: 1
     }
   },
   scales: {
-    y: {
-      beginAtZero: true,
-      max: 100,
-      ticks: {
-        color: '#ffffff',
-        font: {
-          size: 11
-        }
-      },
+    x: {
       grid: {
-        color: 'rgba(255, 255, 255, 0.1)',
-        lineWidth: 1
+        color: 'rgba(255, 255, 255, 0.05)',
+        drawBorder: false
+      },
+      ticks: {
+        color: '#cbd5e1',
+        maxRotation: 0,
+        autoSkip: true,
+        maxTicksLimit: 7
       }
     },
-    x: {
-      ticks: {
-        color: '#ffffff',
-        font: {
-          size: 11
-        }
-      },
+    y: {
+      min: 0,
+      max: 100,
       grid: {
-        color: 'rgba(255, 255, 255, 0.1)',
-        lineWidth: 1
+        color: 'rgba(255, 255, 255, 0.05)',
+        drawBorder: false
+      },
+      ticks: {
+        color: '#cbd5e1'
       }
     }
   },
   interaction: {
-    intersect: false,
-    mode: 'index'
+    mode: 'nearest',
+    axis: 'x',
+    intersect: false
   }
-}
-
-export const coloresGraficos = {
-  cpu: {
-    borde: 'rgb(255, 99, 132)',
-    fondo: 'rgba(255, 99, 132, 0.2)'
-  },
-  memoria: {
-    borde: 'rgb(53, 162, 235)',
-    fondo: 'rgba(53, 162, 235, 0.2)'
-  },
-  peticiones: {
-    borde: 'rgb(75, 192, 192)',
-    fondo: 'rgba(75, 192, 192, 0.2)'
-  }
-}
+};

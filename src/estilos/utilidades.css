@@ -1,147 +1,35 @@
-@import './variables.css';
-
-/* Utilidades de display */
-.oculto {
-  display: none !important;
-}
-
-.visible {
-  display: block !important;
-}
-
-.flex {
-  display: flex !important;
-}
-
-.flex-center {
+/* src/estilos/utilidades.css */
+.flex-centro {
   display: flex;
-  align-items: center;
   justify-content: center;
-}
-
-.flex-between {
-  display: flex;
   align-items: center;
-  justify-content: space-between;
 }
 
-.flex-column {
+.flex-entre {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
 
-/* Utilidades de espaciado */
-.mt-sm { margin-top: var(--espaciado-sm); }
-.mt-md { margin-top: var(--espaciado-md); }
-.mt-lg { margin-top: var(--espaciado-lg); }
-.mt-xl { margin-top: var(--espaciado-xl); }
-
-.mb-sm { margin-bottom: var(--espaciado-sm); }
-.mb-md { margin-bottom: var(--espaciado-md); }
-.mb-lg { margin-bottom: var(--espaciado-lg); }
-.mb-xl { margin-bottom: var(--espaciado-xl); }
-
-.p-sm { padding: var(--espaciado-sm); }
-.p-md { padding: var(--espaciado-md); }
-.p-lg { padding: var(--espaciado-lg); }
-.p-xl { padding: var(--espaciado-xl); }
-
-/* Utilidades de texto */
-.texto-centro {
-  text-align: center;
+.texto-gradiente {
+  background: linear-gradient(to right, var(--acento-primario), var(--acento-secundario));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-.texto-derecha {
-  text-align: right;
-}
-
-.texto-izquierda {
-  text-align: left;
-}
-
-.texto-negrita {
-  font-weight: 600;
-}
-
-.texto-claro {
-  font-weight: 300;
-}
-
-.texto-mayusculas {
-  text-transform: uppercase;
-}
-
-/* Utilidades de color */
-.texto-exito {
-  color: var(--color-exito);
-}
-
-.texto-advertencia {
-  color: var(--color-advertencia);
-}
-
-.texto-error {
-  color: var(--color-error);
-}
-
-.texto-info {
-  color: var(--color-info);
-}
-
-/* Utilidades de fondo */
-.fondo-transparente {
-  background: transparent;
-}
-
-.fondo-difuminado {
+/* Clase reutilizable para paneles con Glassmorphism */
+.panel-cristal {
+  background: var(--glass-fondo);
   backdrop-filter: blur(10px);
-  background: var(--fondo-tarjeta);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-borde);
+  border-radius: var(--radio-md);
+  box-shadow: var(--glass-sombra);
+  transition: transform var(--transicion-rapida), box-shadow var(--transicion-rapida);
 }
 
-/* Utilidades de sombra */
-.sombra-pequena {
-  box-shadow: var(--sombra-pequena);
-}
-
-.sombra-mediana {
-  box-shadow: var(--sombra-mediana);
-}
-
-.sombra-grande {
-  box-shadow: var(--sombra-grande);
-}
-
-/* Utilidades de animación */
-.transicion-rapida {
-  transition: var(--transicion-rapida);
-}
-
-.transicion-normal {
-  transition: var(--transicion-normal);
-}
-
-.transicion-lenta {
-  transition: var(--transicion-lenta);
-}
-
-/* Utilidades de borde */
-.borde-redondeado {
-  border-radius: var(--radio-mediano);
-}
-
-.borde-circular {
-  border-radius: var(--radio-circular);
-}
-
-/* Utilidades responsive */
-@media (max-width: 768px) {
-  .oculto-movil {
-    display: none !important;
-  }
-}
-
-@media (min-width: 769px) {
-  .visible-movil {
-    display: none !important;
-  }
+.panel-cristal:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
 }

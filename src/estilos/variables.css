@@ -1,74 +1,38 @@
+/* src/estilos/variables.css */
 :root {
-  /* Colores principales */
-  --color-primario: #667eea;
-  --color-secundario: #764ba2;
-  --color-acento: #4ade80;
+  /* Paleta de colores principal (Oscura y Moderna) */
+  --fondo-principal: #0f172a;
+  --fondo-secundario: #1e293b;
+  --texto-principal: #f8fafc;
+  --texto-secundario: #cbd5e1;
   
-  /* Colores de estado */
-  --color-exito: #4ade80;
-  --color-advertencia: #fbbf24;
-  --color-error: #f87171;
-  --color-info: #60a5fa;
+  /* Colores de acento */
+  --acento-primario: #3b82f6;
+  --acento-secundario: #8b5cf6;
   
-  /* Colores de fondo */
-  --fondo-degradado-inicio: #667eea;
-  --fondo-degradado-fin: #764ba2;
-  --fondo-tarjeta: rgba(255, 255, 255, 0.1);
-  --fondo-hover: rgba(255, 255, 255, 0.15);
-  
-  /* Colores de texto */
-  --texto-principal: #ffffff;
-  --texto-secundario: rgba(255, 255, 255, 0.9);
-  --texto-deshabilitado: rgba(255, 255, 255, 0.5);
-  
-  /* Bordes */
-  --borde-principal: rgba(255, 255, 255, 0.2);
-  --borde-hover: rgba(255, 255, 255, 0.3);
-  
-  /* Sombras */
-  --sombra-pequena: 0 4px 16px rgba(31, 38, 135, 0.3);
-  --sombra-mediana: 0 8px 32px rgba(31, 38, 135, 0.37);
-  --sombra-grande: 0 12px 48px rgba(31, 38, 135, 0.5);
-  
+  /* Colores de estado (Alertas) */
+  --estado-exito: #10b981;
+  --estado-alerta: #f59e0b;
+  --estado-peligro: #ef4444;
+
+  /* Glassmorphism */
+  --glass-fondo: rgba(30, 41, 59, 0.7);
+  --glass-borde: rgba(255, 255, 255, 0.1);
+  --glass-sombra: 0 4px 30px rgba(0, 0, 0, 0.1);
+
   /* Espaciado */
-  --espaciado-xs: 0.25rem;
-  --espaciado-sm: 0.5rem;
-  --espaciado-md: 1rem;
-  --espaciado-lg: 1.5rem;
-  --espaciado-xl: 2rem;
-  --espaciado-xxl: 3rem;
-  
-  /* Bordes redondeados */
-  --radio-pequeno: 4px;
-  --radio-mediano: 8px;
-  --radio-grande: 12px;
-  --radio-circular: 50%;
+  --espaciado-xs: 0.5rem;
+  --espaciado-sm: 1rem;
+  --espaciado-md: 1.5rem;
+  --espaciado-lg: 2rem;
+  --espaciado-xl: 3rem;
+
+  /* Bordes */
+  --radio-sm: 0.5rem;
+  --radio-md: 1rem;
+  --radio-lg: 1.5rem;
   
   /* Transiciones */
-  --transicion-rapida: 0.15s ease;
+  --transicion-rapida: 0.2s ease;
   --transicion-normal: 0.3s ease;
-  --transicion-lenta: 0.5s ease;
-  
-  /* Tipografía */
-  --fuente-principal: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 
-                      'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 
-                      'Droid Sans', 'Helvetica Neue', sans-serif;
-  --fuente-monospace: 'Courier New', monospace;
-  
-  /* Tamaños de fuente */
-  --texto-xs: 0.75rem;
-  --texto-sm: 0.875rem;
-  --texto-md: 1rem;
-  --texto-lg: 1.125rem;
-  --texto-xl: 1.25rem;
-  --texto-2xl: 1.5rem;
-  --texto-3xl: 2rem;
-  --texto-4xl: 2.5rem;
-  
-  /* Z-index */
-  --z-bajo: 1;
-  --z-normal: 10;
-  --z-medio: 100;
-  --z-alto: 1000;
-  --z-modal: 10000;
 }
