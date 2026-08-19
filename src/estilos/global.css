@@ -1,50 +1,27 @@
-/* src/estilos/global.css */
-@import './variables.css';
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+@layer base {
+  body {
+    @apply bg-background text-text-main font-sans antialiased m-0 p-0 overflow-hidden;
+  }
 }
 
-body {
-  font-family: 'Inter', sans-serif;
-  background-color: var(--fondo-principal);
-  color: var(--texto-principal);
-  min-height: 100vh;
-  /* Fondo con un sutil gradiente moderno */
-  background: radial-gradient(circle at top right, #1e1b4b, var(--fondo-principal));
-  background-attachment: fixed;
-}
-
-#root {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-/* Scrollbar personalizado */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-.panel-cristal {
-  background: var(--glass-fondo);
-  border-radius: var(--radio-lg);
-  box-shadow: var(--glass-sombra);
-  border: 1px solid var(--glass-borde);
-}
-
-::-webkit-scrollbar-track {
-  background: var(--fondo-principal);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--fondo-secundario);
-  border-radius: var(--radio-sm);
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--acento-primario);
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+  }
 }
