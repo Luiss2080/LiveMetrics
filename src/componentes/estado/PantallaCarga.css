@@ -1,0 +1,41 @@
+/* src/componentes/estado/PantallaCarga.css */
+.pantalla-carga {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--fondo-principal);
+  z-index: 9999;
+}
+
+.spinner-contenedor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--espaciado-md);
+  padding: var(--espaciado-xl);
+  text-align: center;
+}
+
+.spinner {
+  width: 60px;
+  height: 60px;
+  border: 4px solid var(--fondo-secundario);
+  border-top-color: var(--acento-primario);
+  border-bottom-color: var(--acento-secundario);
+  border-radius: 50%;
+  animation: girar 1.5s linear infinite;
+}
+
+@keyframes girar {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
