@@ -4,6 +4,7 @@ import Encabezado from '../componentes/encabezado/Encabezado';
 import { useMetricas } from '../hooks/useMetricas';
 import { formatearHora, formatearPorcentaje, formatearNumeroGrande } from '../utilidades/formateadores';
 import { Download } from 'lucide-react';
+import { motion } from 'framer-motion';
 import './Historial.css';
 
 const Historial = () => {
@@ -36,7 +37,13 @@ const Historial = () => {
   return (
     <ContenedorPrincipal>
       <Encabezado />
-      <main className="panel-contenido">
+      <motion.main 
+        className="panel-contenido"
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        exit={{ opacity: 0, x: -20 }}
+        transition={{ duration: 0.4 }}
+      >
         <div className="historial-panel panel-cristal">
           <div className="historial-encabezado-acciones flex-entre">
             <h2 className="historial-titulo">Historial de Eventos</h2>
@@ -94,7 +101,7 @@ const Historial = () => {
             </table>
           </div>
         </div>
-      </main>
+      </motion.main>
     </ContenedorPrincipal>
   );
 };

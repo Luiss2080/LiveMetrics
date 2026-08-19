@@ -6,6 +6,7 @@ import GraficoLineas from '../componentes/graficos/GraficoLineas';
 import GraficoBarras from '../componentes/graficos/GraficoBarras';
 import GraficoAnillo from '../componentes/graficos/GraficoAnillo';
 import { useMetricas } from '../hooks/useMetricas';
+import { motion } from 'framer-motion';
 import './PanelPrincipal.css';
 
 const PanelPrincipal = () => {
@@ -16,7 +17,13 @@ const PanelPrincipal = () => {
     <ContenedorPrincipal>
       <Encabezado />
       
-      <main className="panel-contenido">
+      <motion.main 
+        className="panel-contenido"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -20 }}
+        transition={{ duration: 0.4 }}
+      >
         <GrupoTarjetas metricas={ultimaMetrica} />
         
         <div className="graficos-contenedor">
@@ -24,7 +31,7 @@ const PanelPrincipal = () => {
           <GraficoAnillo disco={ultimaMetrica?.disco || 0} />
           <GraficoBarras historial={historialMetricas} />
         </div>
-      </main>
+      </motion.main>
     </ContenedorPrincipal>
   );
 };
