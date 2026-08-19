@@ -1,0 +1,61 @@
+/* src/componentes/auth/ModalAuth.css */
+.modal-auth-contenedor {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+  padding: 0;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.tabs-auth {
+  display: flex;
+  width: 100%;
+  border-bottom: 1px solid var(--glass-borde);
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 1rem;
+  background: transparent;
+  border: none;
+  color: var(--texto-secundario);
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: var(--transicion-normal);
+  border-bottom: 2px solid transparent;
+}
+
+.tab-btn:hover {
+  color: var(--texto-principal);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.tab-btn.activo {
+  color: var(--acento-primario);
+  border-bottom: 2px solid var(--acento-primario);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.auth-form {
+  padding: var(--espaciado-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaciado-md);
+}
+
+.boton-auth {
+  margin-top: var(--espaciado-md);
+  padding: 1rem;
+  font-size: 1rem;
+}
+
+.boton-auth:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
