@@ -1,0 +1,49 @@
+/* src/vistas/Historial.css */
+.historial-panel {
+  padding: var(--espaciado-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaciado-md);
+  height: calc(100vh - 180px);
+}
+
+.historial-titulo {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--texto-principal);
+}
+
+.tabla-contenedor {
+  overflow-y: auto;
+  border-radius: var(--radio-sm);
+}
+
+.tabla-historial {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.tabla-historial th,
+.tabla-historial td {
+  padding: var(--espaciado-sm);
+  border-bottom: 1px solid var(--glass-borde);
+}
+
+.tabla-historial th {
+  background-color: rgba(255, 255, 255, 0.05);
+  font-weight: 500;
+  color: var(--texto-secundario);
+  position: sticky;
+  top: 0;
+}
+
+.tabla-historial tr:hover {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+.texto-centro {
+  text-align: center;
+  color: var(--texto-secundario);
+  padding: var(--espaciado-lg);
+}

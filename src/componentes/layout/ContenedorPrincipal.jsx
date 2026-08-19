@@ -1,4 +1,5 @@
 import React from 'react';
+import BarraLateral from './BarraLateral';
 import './ContenedorPrincipal.css';
 
 const ContenedorPrincipal = ({ children }) => {
@@ -7,8 +8,11 @@ const ContenedorPrincipal = ({ children }) => {
       <div className="decoracion-fondo circulo-1"></div>
       <div className="decoracion-fondo circulo-2"></div>
       
-      <div className="contenido-principal">
-        {children}
+      <div className="layout-con-sidebar">
+        <BarraLateral />
+        <div className="contenido-principal">
+          {children}
+        </div>
       </div>
     </div>
   );
