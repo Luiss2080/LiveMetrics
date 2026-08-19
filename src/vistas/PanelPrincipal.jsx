@@ -1,32 +1,30 @@
-import React from 'react'
-import { useMetricas } from '../hooks/useMetricas'
-import { useConexion } from '../hooks/useConexion'
-import Encabezado from '../componentes/encabezado/Encabezado'
-import IndicadorConexion from '../componentes/estado/IndicadorConexion'
-import GrupoTarjetas from '../componentes/tarjetas/GrupoTarjetas'
-import GraficoLineas from '../componentes/graficos/GraficoLineas'
-import GraficoBarras from '../componentes/graficos/GraficoBarras'
-import ContenedorPrincipal from '../componentes/layout/ContenedorPrincipal'
+import React from 'react';
+import ContenedorPrincipal from '../componentes/layout/ContenedorPrincipal';
+import Encabezado from '../componentes/encabezado/Encabezado';
+import GrupoTarjetas from '../componentes/tarjetas/GrupoTarjetas';
+import GraficoLineas from '../componentes/graficos/GraficoLineas';
+import GraficoBarras from '../componentes/graficos/GraficoBarras';
+import { useMetricas } from '../hooks/useMetricas';
+import './PanelPrincipal.css';
 
-function PanelPrincipal() {
-  const { metricas, estadisticasActuales } = useMetricas()
-  const { conectado } = useConexion()
+const PanelPrincipal = () => {
+  // Limitar a los últimos 15 datos para evitar sobrecarga en gráficos
+  const { historialMetricas, ultimaMetrica } = useMetricas(15);
 
   return (
-    <>
-      <IndicadorConexion conectado={conectado} />
+    <ContenedorPrincipal>
+      <Encabezado />
       
-      <ContenedorPrincipal>
-        <Encabezado />
+      <main className="panel-contenido">
+        <GrupoTarjetas metricas={ultimaMetrica} />
         
-        <GrupoTarjetas estadisticas={estadisticasActuales} />
-        
-        <GraficoLineas datos={metricas} />
-        
-        <GraficoBarras datos={metricas} />
-      </ContenedorPrincipal>
-    </>
-  )
-}
+        <div className="graficos-contenedor">
+          <GraficoLineas historial={historialMetricas} />
+          <GraficoBarras historial={historialMetricas} />
+        </div>
+      </main>
+    </ContenedorPrincipal>
+  );
+};
 
-export default PanelPrincipal
+export default PanelPrincipal;

@@ -1,0 +1,19 @@
+/* src/vistas/PanelPrincipal.css */
+.panel-contenido {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaciado-md);
+  width: 100%;
+}
+
+.graficos-contenedor {
+  display: flex;
+  gap: var(--espaciado-md);
+  flex-wrap: wrap;
+}
+
+@media (max-width: 900px) {
+  .graficos-contenedor {
+    flex-direction: column;
+  }
+}
