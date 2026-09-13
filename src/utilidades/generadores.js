@@ -23,7 +23,9 @@ export function generarPaletaColores(cantidad) {
     '#9966ff',
     '#ff9f40'
   ]
-  return colores.slice(0, cantidad)
+  // Si se piden más colores que los definidos, se cicla la paleta en vez de
+  // devolver menos colores de los solicitados (dejaría categorías sin color).
+  return Array.from({ length: cantidad }, (_, i) => colores[i % colores.length])
 }
 
 /**
