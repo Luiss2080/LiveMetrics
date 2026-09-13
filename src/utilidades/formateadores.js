@@ -30,7 +30,9 @@ export const obtenerColorEstado = (valor) => {
  * Formatea solo la hora de una fecha ISO
  */
 export const formatearHora = (fechaIso) => {
+  if (!fechaIso) return '--:--:--';
   const fecha = new Date(fechaIso);
+  if (Number.isNaN(fecha.getTime())) return '--:--:--';
   return fecha.toLocaleTimeString('es-ES', {
     hour: '2-digit',
     minute: '2-digit',
