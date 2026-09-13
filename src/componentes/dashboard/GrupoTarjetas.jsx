@@ -77,7 +77,13 @@ const GrupoTarjetas = ({ metricas }) => {
           >
             <div className="flex justify-between items-start mb-2">
               <span className="text-3xl font-extrabold text-text-main tracking-tight">{t.valor}</span>
-              <button className="bg-transparent border-none text-text-muted text-xl cursor-pointer hover:text-text-main">⋮</button>
+              <button
+                type="button"
+                aria-label={`Más opciones para ${t.titulo}`}
+                className="bg-transparent border-none text-text-muted text-xl cursor-pointer hover:text-text-main"
+              >
+                ⋮
+              </button>
             </div>
             <div className="text-sm font-medium text-text-muted mb-8">{t.titulo}</div>
             
