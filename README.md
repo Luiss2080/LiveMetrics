@@ -21,12 +21,11 @@ LiveMetrics es un **prototipo de dashboard**: un servidor Node emite cada segund
 aleatorios con fluctuación) por Socket.io y una interfaz React las dibuja en tarjetas y gráficos. **No** monitorea
 ninguna máquina real. Incluye login/registro con MySQL y JWT.
 
-> **Estado honesto:** en el commit actual `npm run build` y `vite` **fallan**: `PantallaCarga.jsx` e
-> `IndicadorConexion.jsx` importan archivos `.css` que no existen en el repo. Por eso este README no incluye capturas.
+> **Estado:** `npm run build` compila (verificado con `vite build`). Este README aún no incluye capturas de la interfaz.
 
 ## 🎬 Vista rápida
 
-No se pudo capturar la interfaz (el front no compila, ver arriba). Flujo previsto por el código:
+Flujo según el código:
 
 ```text
 /login ──(registro/login → POST /api/*, JWT en localStorage)──► /
@@ -83,7 +82,7 @@ npm run dev      # frontend Vite en el puerto 3000
 ```
 
 - `npm ci` funciona; `npm run server` arranca sin MySQL (Sequelize no consulta hasta el primer login).
-- `npm run dev` levanta Vite pero **la pantalla muestra error de compilación** por los CSS faltantes.
+- `npm run dev` levanta Vite en el puerto 3000 y `npm run build` genera `dist/`.
 - `scripts/.start.bat` (Windows) instala dependencias y lanza ambos procesos con `npx concurrently`.
 - Las URLs `http://localhost:3001` están escritas a mano en `src/servicios/socketServicio.js` y `ModalAuth.jsx`.
 
@@ -131,7 +130,6 @@ clave en `localStorage` (el token no se valida ni el socket exige autenticación
 
 ## 🚧 Lo que todavía no existe
 
-- **No compila**: faltan `PantallaCarga.css` e `IndicadorConexion.css`.
 - Métricas reales: todo es simulado; no hay conectores a servidores ni APIs.
 - Bug visible: la tarjeta "RAM Memory" lee `metricas.ram`, pero el servidor envía `memoria`, así que mostraría 0 %.
 - Configuración no guarda; el umbral de CPU de esa pantalla no afecta a las alertas (fijas en código).
