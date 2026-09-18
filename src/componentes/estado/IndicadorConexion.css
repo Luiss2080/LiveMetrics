@@ -1,0 +1,49 @@
+.indicador-conexion {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  background: #ffffff;
+  box-shadow: 0 2px 10px rgba(30, 32, 34, 0.06);
+}
+
+.indicador-conexion .pulso {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.indicador-conexion.conectado {
+  color: #10b981;
+}
+
+.indicador-conexion.conectado .pulso {
+  animation: livemetrics-pulso 1.6s ease-out infinite;
+}
+
+.indicador-conexion.desconectado {
+  color: #ef4444;
+}
+
+.indicador-conexion .texto-estado {
+  color: #1e2022;
+}
+
+@keyframes livemetrics-pulso {
+  0% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.55);
+  }
+  100% {
+    box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .indicador-conexion.conectado .pulso {
+    animation: none;
+  }
+}
