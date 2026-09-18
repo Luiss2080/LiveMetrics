@@ -124,8 +124,10 @@ administrador de desarrollo. El repo no trae `.sequelizerc`, así que `sequelize
 ## 🔒 Seguridad
 
 Implementado: contraseñas con bcrypt y respuesta genérica "Credenciales inválidas".
-**Riesgos conocidos** (no apto para exponer a internet tal cual): el secreto del JWT está escrito en `server/index.js`;
-CORS abierto a cualquier origen (`origin: '*'`); las rutas del front se "protegen" solo comprobando que exista una
+El secreto del JWT viene de `JWT_SECRET` (obligatorio, ≥32 caracteres, con `NODE_ENV=production`; en desarrollo, si falta,
+se genera uno aleatorio por proceso) y CORS (API y Socket.io) solo admite los orígenes de `CORS_ORIGINS` (lista separada por
+comas; por defecto `http://localhost:3000` y `http://127.0.0.1:3000`).
+**Riesgos conocidos** (no apto para exponer a internet tal cual): las rutas del front se "protegen" solo comprobando que exista una
 clave en `localStorage` (el token no se valida ni el socket exige autenticación); el usuario/clave de MySQL están en
 `server/config/config.json`; el seeder crea una cuenta administradora conocida.
 
@@ -136,8 +138,7 @@ clave en `localStorage` (el token no se valida ni el socket exige autenticación
 - Configuración no guarda; el umbral de CPU de esa pantalla no afecta a las alertas (fijas en código).
 - El historial vive solo en memoria del navegador (se pierde al recargar); no hay persistencia de métricas.
 - Puertos y URLs fijos (3000/3001); sin variables de entorno para el front.
-- Sin tests, sin CI. La descripción del `package.json` lo llama "DataPulse"; el `cors` que importa el servidor no figura
-  en las dependencias (llega transitivamente por `socket.io`).
+- Sin CI. La descripción del `package.json` lo llama "DataPulse".
 
 ## 📄 Licencia
 
