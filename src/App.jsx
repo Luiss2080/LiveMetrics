@@ -7,11 +7,7 @@ import Historial from './vistas/Historial';
 import Configuracion from './vistas/Configuracion';
 import Login from './vistas/Login';
 import PantallaCarga from './componentes/estado/PantallaCarga';
-
-const RutaProtegida = ({ children }) => {
-  const auth = localStorage.getItem('livemetrics-auth');
-  return auth ? children : <Navigate to="/login" />;
-};
+import RutaProtegida from './componentes/auth/RutaProtegida';
 
 function App() {
   const [cargando, setCargando] = useState(true);

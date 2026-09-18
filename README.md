@@ -127,8 +127,9 @@ Implementado: contraseñas con bcrypt y respuesta genérica "Credenciales invál
 El secreto del JWT viene de `JWT_SECRET` (obligatorio, ≥32 caracteres, con `NODE_ENV=production`; en desarrollo, si falta,
 se genera uno aleatorio por proceso) y CORS (API y Socket.io) solo admite los orígenes de `CORS_ORIGINS` (lista separada por
 comas; por defecto `http://localhost:3000` y `http://127.0.0.1:3000`).
-**Riesgos conocidos** (no apto para exponer a internet tal cual): las rutas del front se "protegen" solo comprobando que exista una
-clave en `localStorage` (el token no se valida ni el socket exige autenticación); el usuario/clave de MySQL están en
+Las rutas del front validan el token contra `GET /api/sesion` antes de mostrarse (si es inválido se limpia `localStorage` y se
+redirige a `/login`).
+**Riesgos conocidos** (no apto para exponer a internet tal cual): el socket no exige autenticación; el usuario/clave de MySQL están en
 `server/config/config.json`; el seeder crea una cuenta administradora conocida.
 
 ## 🚧 Lo que todavía no existe
