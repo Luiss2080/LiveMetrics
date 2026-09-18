@@ -1,272 +1,147 @@
 <div align="center">
-
-# 📊 LiveMetrics
-
-### *Visualización dinámica de métricas en tiempo real*
-
-[![React](https://img.shields.io/badge/React-18.3-61dafb?style=for-the-badge&logo=react&logoColor=white)](https://reactjs.org/)
-[![D3.js](https://img.shields.io/badge/D3.js-7.9-f9a03c?style=for-the-badge&logo=d3.js&logoColor=white)](https://d3js.org/)
-[![Chart.js](https://img.shields.io/badge/Chart.js-4.4-ff6384?style=for-the-badge&logo=chart.js&logoColor=white)](https://www.chartjs.org/)
-[![Socket.io](https://img.shields.io/badge/Socket.io-4.7-010101?style=for-the-badge&logo=socket.io&logoColor=white)](https://socket.io/)
-
-![LiveMetrics Preview](https://via.placeholder.com/800x400/667eea/ffffff?text=LiveMetrics+Dashboard)
-
+  <img src="docs/assets/logo.svg" width="96" alt="Logo de LiveMetrics" />
+  <h1>LiveMetrics</h1>
+  <p><b>Dashboard React que muestra en vivo métricas de sistema (CPU, RAM, peticiones, usuarios, disco) recibidas por WebSocket.</b></p>
+  <img src="https://img.shields.io/badge/estado-no%20compila%20(falta%20CSS)-ef4444?style=for-the-badge" alt="Estado: no compila por archivos CSS faltantes" />
+  <img src="https://img.shields.io/badge/React-18.3-61dafb?style=for-the-badge&logo=react&logoColor=black" alt="React 18.3" />
+  <img src="https://img.shields.io/badge/Vite-6-646cff?style=for-the-badge&logo=vite&logoColor=white" alt="Vite 6" />
+  <img src="https://img.shields.io/badge/Socket.io-4.7-010101?style=for-the-badge&logo=socketdotio&logoColor=white" alt="Socket.io 4.7" />
+  <img src="https://img.shields.io/badge/tests-0-9ca3af?style=for-the-badge" alt="Sin tests" />
+  <img src="https://img.shields.io/badge/licencia-MIT-blue?style=for-the-badge" alt="Licencia MIT" />
+  <p>
+    <a href="#-inicio-rápido">Inicio rápido</a> ·
+    <a href="#-características">Características</a> ·
+    <a href="#-arquitectura">Arquitectura</a> ·
+    <a href="#-pruebas">Pruebas</a> ·
+    <a href="#-lo-que-todavía-no-existe">Limitaciones</a>
+  </p>
 </div>
 
----
+LiveMetrics es un **prototipo de dashboard**: un servidor Node emite cada segundo métricas **simuladas** (valores
+aleatorios con fluctuación) por Socket.io y una interfaz React las dibuja en tarjetas y gráficos. **No** monitorea
+ninguna máquina real. Incluye login/registro con MySQL y JWT.
 
-## 🎯 ¿Qué es LiveMetrics?
+> **Estado honesto:** en el commit actual `npm run build` y `vite` **fallan**: `PantallaCarga.jsx` e
+> `IndicadorConexion.jsx` importan archivos `.css` que no existen en el repo. Por eso este README no incluye capturas.
 
-**LiveMetrics** es un dashboard interactivo que visualiza métricas de sistemas en **tiempo real**. Diseñado para monitorear CPU, memoria, peticiones y usuarios activos con gráficos dinámicos y actualizaciones instantáneas vía WebSockets.
+## 🎬 Vista rápida
 
-> 💡 **Ideal para:** Monitoreo de servidores, análisis de rendimiento, dashboards IoT, visualización de datos en tiempo real.
+No se pudo capturar la interfaz (el front no compila, ver arriba). Flujo previsto por el código:
 
----
-
-## ✨ Características Principales
-
-<table>
-<tr>
-<td width="50%">
-
-### 🎨 **Interfaz Moderna**
-- Diseño glassmorphism
-- Animaciones fluidas
-- Tarjetas interactivas
-- Responsive design
-
-</td>
-<td width="50%">
-
-### ⚡ **Tiempo Real**
-- Actualizaciones cada segundo
-- Sin recargas de página
-- WebSockets (Socket.io)
-- Indicador de conexión
-
-</td>
-</tr>
-<tr>
-<td width="50%">
-
-### 📈 **Visualizaciones**
-- Gráficos de líneas (Chart.js)
-- Gráficos de barras (D3.js)
-- Tarjetas de métricas
-- Alertas por color
-
-</td>
-<td width="50%">
-
-### 🏗️ **Arquitectura Modular**
-- 29 archivos organizados
-- Componentes reutilizables
-- Hooks personalizados
-- Código mantenible
-
-</td>
-</tr>
-</table>
-
----
-
-## 🚀 Inicio Rápido
-
-### 📋 Prerrequisitos
-
-```bash
-Node.js >= 16.x
-npm >= 8.x
+```text
+/login ──(registro/login → POST /api/*, JWT en localStorage)──► /
+   /                → 4 tarjetas + gráfico de líneas + anillo de disco + barras (datos por Socket.io)
+   /historial       → tabla de las últimas 50 lecturas, filtro de alertas, descarga CSV
+   /configuracion   → formulario de ajustes (simulado: solo muestra un alert)
 ```
 
-### ⚙️ Instalación
+## ✨ Características
 
-```bash
-# Clonar el repositorio
-git clone https://github.com/tu-usuario/livemetrics.git
+| Característica | Detalle |
+|---|---|
+| Métricas en vivo | El servidor emite el evento `metricas:actualizacion` cada 1 s con cpu, memoria, peticiones, usuarios, disco y latencia de red (datos simulados, con picos aleatorios) |
+| Panel principal | Tarjetas de CPU, RAM, Requests/s y Active Users; gráfico de líneas (Chart.js), anillo de disco y barras (D3) |
+| Alertas | Toast de error si CPU > 85 % o memoria > 90 %, con enfriamiento de 5 s |
+| Historial | Últimas 50 lecturas, filtro "solo alertas" (CPU o memoria ≥ 80 %) y exportación a CSV desde el navegador |
+| Autenticación | `POST /api/register` y `POST /api/login` (bcrypt + JWT de 1 día) sobre MySQL con Sequelize |
+| Tema | Modo claro/oscuro guardado en `localStorage` |
+| Configuración | Pantalla de ajustes **simulada** (no persiste nada) |
 
-# Navegar al directorio
-cd livemetrics
-
-# Instalar dependencias (ya instaladas en este proyecto)
-npm install
-```
-
-### 🎬 Ejecución
-
-<table>
-<tr>
-<td width="50%">
-
-**1️⃣ Iniciar el servidor de datos**
-
-```bash
-npm run server
-```
-> 🟢 Servidor corriendo en `localhost:3001`
-
-</td>
-<td width="50%">
-
-**2️⃣ Iniciar la aplicación**
-
-```bash
-npm run dev
-```
-> 🌐 App disponible en `localhost:3000`
-
-</td>
-</tr>
-</table>
-
----
-
-## 📸 Capturas de Pantalla
-
-<div align="center">
-
-| Dashboard Principal | Gráficos en Tiempo Real |
-|:---:|:---:|
-| ![Dashboard](https://via.placeholder.com/380x250/667eea/ffffff?text=Dashboard) | ![Graficos](https://via.placeholder.com/380x250/764ba2/ffffff?text=Charts) |
-
-| Tarjetas de Métricas | Visualización D3.js |
-|:---:|:---:|
-| ![Metricas](https://via.placeholder.com/380x250/4ade80/ffffff?text=Metrics) | ![D3](https://via.placeholder.com/380x250/f87171/ffffff?text=D3+Bars) |
-
-</div>
-
----
-
-## 🛠️ Stack Tecnológico
+## 🏗️ Arquitectura
 
 ```mermaid
-graph LR
-    A[React 18] --> B[LiveMetrics]
-    C[Vite 6] --> B
-    D[Chart.js] --> B
-    E[D3.js] --> B
-    F[Socket.io] --> B
-    G[Express] --> F
+flowchart LR
+  subgraph Servidor["server/index.js (Express + Socket.io, :3001)"]
+    G["setInterval 1 s: métricas simuladas"]
+    A["/api/register · /api/login"]
+  end
+  DB[("MySQL (Sequelize)<br/>tabla Usuarios")]
+  subgraph Cliente["src/ (React + Vite, :3000)"]
+    S["servicios/socketServicio.js"] --> H["hooks/useMetricas.js"]
+    H --> P["vistas: PanelPrincipal, Historial"]
+    P --> C["componentes: tarjetas y gráficos"]
+    L["vistas/Login + ModalAuth"]
+  end
+  G -- "metricas:actualizacion" --> S
+  L -- "fetch" --> A
+  A --> DB
 ```
 
-<div align="center">
+## 🚀 Inicio rápido
 
-| Frontend | Visualización | Backend | Build |
-|:---:|:---:|:---:|:---:|
-| React 18.3 | D3.js 7.9 | Express 4.18 | Vite 6.0 |
-| React DOM | Chart.js 4.4 | Socket.io 4.7 | ESLint |
+| Requisito | Detalle |
+|---|---|
+| Node.js + npm | Sin versión declarada en `package.json` (Vite 6 pide Node 18+) |
+| MySQL | Solo para login/registro (bases `livemetrics`, `livemetrics_test`, `livemetrics_prod` en `server/config/config.json`) |
 
-</div>
-
----
-
-## 📦 Scripts Disponibles
-
-| Comando | Descripción |
-|---------|-------------|
-| `npm run dev` | 🚀 Inicia el servidor de desarrollo (puerto 3000) |
-| `npm run server` | 🔌 Inicia el servidor Socket.io (puerto 3001) |
-| `npm run build` | 📦 Compila para producción |
-| `npm run preview` | 👁️ Vista previa de la build |
-
----
-
-## 📂 Estructura del Proyecto
-
-```
-LiveMetrics/
-│
-├── 📁 server/               # Backend Socket.io
-│   └── index.js            # Servidor de métricas
-│
-├── 📁 src/
-│   ├── 📁 componentes/     # Componentes UI (12 archivos)
-│   │   ├── encabezado/     # Header
-│   │   ├── estado/         # Indicadores
-│   │   ├── graficos/       # Charts
-│   │   ├── layout/         # Layout
-│   │   └── tarjetas/       # Cards
-│   │
-│   ├── 📁 configuracion/   # Config (2 archivos)
-│   ├── 📁 estilos/         # CSS (3 archivos)
-│   ├── 📁 hooks/           # Custom hooks (2 archivos)
-│   ├── 📁 servicios/       # Services (1 archivo)
-│   ├── 📁 utilidades/      # Utils (2 archivos)
-│   ├── 📁 vistas/          # Views (1 archivo)
-│   │
-│   ├── App.jsx             # Componente raíz
-│   └── main.jsx            # Entry point
-│
-└── 📄 package.json         # Dependencias
+```bash
+git clone https://github.com/Luiss2080/LiveMetrics.git
+cd LiveMetrics
+npm ci
+npm run server   # backend Socket.io en el puerto 3001
+npm run dev      # frontend Vite en el puerto 3000
 ```
 
-> 📖 Ver [ESTRUCTURA.md](ESTRUCTURA.md) para más detalles
+- `npm ci` funciona; `npm run server` arranca sin MySQL (Sequelize no consulta hasta el primer login).
+- `npm run dev` levanta Vite pero **la pantalla muestra error de compilación** por los CSS faltantes.
+- `scripts/.start.bat` (Windows) instala dependencias y lanza ambos procesos con `npx concurrently`.
+- Las URLs `http://localhost:3001` están escritas a mano en `src/servicios/socketServicio.js` y `ModalAuth.jsx`.
 
----
+<details>
+<summary>Estructura de carpetas</summary>
 
-## 🎨 Métricas Monitoreadas
+```text
+server/            # index.js (Express + Socket.io + auth), models/, migrations/, seeders/, config/
+src/
+  componentes/     # auth, dashboard, estado, graficos, layout
+  configuracion/   # d3Config.js, graficosConfig.js
+  contextos/       # TemaContext.jsx
+  hooks/           # useMetricas.js, useConexion.js
+  servicios/       # socketServicio.js
+  utilidades/      # formateadores.js, generadores.js
+  vistas/          # PanelPrincipal, Historial, Configuracion, Login
+public/logo.jpg
+```
 
-| Métrica | Descripción | Rango | Color |
-|:---:|---|:---:|:---:|
-| 💻 **CPU** | Uso del procesador | 0-100% | 🟢🟡🔴 |
-| 🧠 **Memoria** | Uso de RAM | 0-100% | 🟢🟡🔴 |
-| 📡 **Requests** | Peticiones por segundo | 0-1000 | 🟢 |
-| 👥 **Usuarios** | Usuarios activos | 0-500 | 🟢 |
+`ESTRUCTURA.md` describe una organización anterior (carpetas `encabezado/`, `tarjetas/`, `variables.css`…) que ya no
+coincide con el árbol real.
 
-**Sistema de Alertas por Color:**
-- 🟢 Verde: < 30% (Normal)
-- 🟡 Amarillo: 30-70% (Advertencia)
-- 🔴 Rojo: > 70% (Crítico)
+</details>
 
----
+<details>
+<summary>Base de datos</summary>
 
-## 🔮 Roadmap
+Hay una migración (`create-usuario`), un modelo `Usuario` (nombre, email, password) y un seeder que inserta un usuario
+administrador de desarrollo. El repo no trae `.sequelizerc`, así que `sequelize-cli` no encuentra solo la carpeta
+`server/` (no verificado el comando exacto para migrar).
 
-- [ ] 🔐 Autenticación de usuarios
-- [ ] 💾 Persistencia de datos (MongoDB/PostgreSQL)
-- [ ] 📊 Más tipos de gráficos (pie, scatter, area)
-- [ ] 🔔 Sistema de alertas/notificaciones
-- [ ] 📱 Aplicación móvil (React Native)
-- [ ] 🌙 Modo oscuro/claro
-- [ ] 🎛️ Panel de configuración
-- [ ] 📥 Exportar datos (CSV/JSON/PDF)
-- [ ] 🔌 Conectores para APIs reales
-- [ ] 📈 Análisis histórico con rangos de tiempo
+</details>
 
----
+## 🧪 Pruebas
 
-## 🤝 Contribuir
+No hay tests ni script `test` en `package.json`. No hay integración continua.
 
-¡Las contribuciones son bienvenidas! Por favor:
+## 🔒 Seguridad
 
-1. Fork el proyecto
-2. Crea tu rama (`git checkout -b feature/AmazingFeature`)
-3. Commit tus cambios (`git commit -m 'Add: Amazing Feature'`)
-4. Push a la rama (`git push origin feature/AmazingFeature`)
-5. Abre un Pull Request
+Implementado: contraseñas con bcrypt y respuesta genérica "Credenciales inválidas".
+**Riesgos conocidos** (no apto para exponer a internet tal cual): el secreto del JWT está escrito en `server/index.js`;
+CORS abierto a cualquier origen (`origin: '*'`); las rutas del front se "protegen" solo comprobando que exista una
+clave en `localStorage` (el token no se valida ni el socket exige autenticación); el usuario/clave de MySQL están en
+`server/config/config.json`; el seeder crea una cuenta administradora conocida.
 
----
+## 🚧 Lo que todavía no existe
+
+- **No compila**: faltan `PantallaCarga.css` e `IndicadorConexion.css`.
+- Métricas reales: todo es simulado; no hay conectores a servidores ni APIs.
+- Bug visible: la tarjeta "RAM Memory" lee `metricas.ram`, pero el servidor envía `memoria`, así que mostraría 0 %.
+- Configuración no guarda; el umbral de CPU de esa pantalla no afecta a las alertas (fijas en código).
+- El historial vive solo en memoria del navegador (se pierde al recargar); no hay persistencia de métricas.
+- Puertos y URLs fijos (3000/3001); sin variables de entorno para el front.
+- Sin tests, sin CI. La descripción del `package.json` lo llama "DataPulse"; el `cors` que importa el servidor no figura
+  en las dependencias (llega transitivamente por `socket.io`).
 
 ## 📄 Licencia
 
-Este proyecto está bajo la Licencia MIT. Ver `LICENSE` para más información.
+MIT (ver `LICENSE`).
 
----
-
-## 💬 Contacto
-
-**Desarrollador** - [@tu-usuario](https://github.com/tu-usuario)
-
-**Link del Proyecto** - [https://github.com/tu-usuario/livemetrics](https://github.com/tu-usuario/livemetrics)
-
----
-
-<div align="center">
-
-### ⭐ Si te gusta este proyecto, ¡dale una estrella!
-
-**Hecho con ❤️ usando React, D3.js, Chart.js y Socket.io**
-
-[🐛 Reportar Bug](https://github.com/tu-usuario/livemetrics/issues) · [✨ Solicitar Feature](https://github.com/tu-usuario/livemetrics/issues) · [📖 Documentación](https://github.com/tu-usuario/livemetrics/wiki)
-
-</div>
+<div align="center"><sub>Hecho por Luiss2080 · LiveMetrics</sub></div>
