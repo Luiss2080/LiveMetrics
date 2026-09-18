@@ -118,7 +118,7 @@ administrador de desarrollo. El repo no trae `.sequelizerc`, así que `sequelize
 
 ## 🧪 Pruebas
 
-No hay tests ni script `test` en `package.json`. No hay integración continua.
+`npm test` (`node --test`, carpeta `test/`) cubre el contrato de métricas entre servidor y cliente. No hay integración continua.
 
 ## 🔒 Seguridad
 
@@ -131,7 +131,6 @@ clave en `localStorage` (el token no se valida ni el socket exige autenticación
 ## 🚧 Lo que todavía no existe
 
 - Métricas reales: todo es simulado; no hay conectores a servidores ni APIs.
-- Bug visible: la tarjeta "RAM Memory" lee `metricas.ram`, pero el servidor envía `memoria`, así que mostraría 0 %.
 - Configuración no guarda; el umbral de CPU de esa pantalla no afecta a las alertas (fijas en código).
 - El historial vive solo en memoria del navegador (se pierde al recargar); no hay persistencia de métricas.
 - Puertos y URLs fijos (3000/3001); sin variables de entorno para el front.

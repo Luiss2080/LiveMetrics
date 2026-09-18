@@ -1,6 +1,7 @@
 import React from 'react';
 import { Cpu, MemoryStick, Activity, Users } from 'lucide-react';
 import { formatearNumeroGrande, formatearPorcentaje } from '../../utilidades/formateadores';
+import { porcentajeMemoria } from '../../utilidades/metricas';
 import { motion } from 'framer-motion';
 
 const GrupoTarjetas = ({ metricas }) => {
@@ -11,15 +12,17 @@ const GrupoTarjetas = ({ metricas }) => {
       valor: formatearPorcentaje(metricas?.cpu || 0),
       icono: <Cpu size={24} />,
       bgColor: 'bg-pastel-blue',
+      alto: metricas?.cpu > 80,
       badge: metricas?.cpu > 80 ? 'text-accent-danger' : 'text-accent-success'
     },
     {
       id: 'ram',
       titulo: 'RAM Memory',
-      valor: formatearPorcentaje(metricas?.ram || 0),
+      valor: formatearPorcentaje(porcentajeMemoria(metricas)),
       icono: <MemoryStick size={24} />,
       bgColor: 'bg-pastel-purple',
-      badge: metricas?.ram > 80 ? 'text-accent-danger' : 'text-accent-success'
+      alto: porcentajeMemoria(metricas) > 80,
+      badge: porcentajeMemoria(metricas) > 80 ? 'text-accent-danger' : 'text-accent-success'
     },
     {
       id: 'req',
@@ -93,7 +96,7 @@ const GrupoTarjetas = ({ metricas }) => {
               </div>
               <div className="bg-white/60 px-3 py-1 rounded-full text-xs font-bold text-text-main">
                 <span className={t.badge}>
-                  {t.id === 'cpu' || t.id === 'ram' ? (metricas?.[t.id] > 80 ? '⚠️ High' : '+0.14%') : '+0.14%'}
+                  {t.alto ? '⚠️ High' : '+0.14%'}
                 </span>
               </div>
             </div>
